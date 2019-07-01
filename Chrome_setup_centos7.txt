@@ -1,0 +1,12 @@
+Procedure to install Google Chrome on a CentOS:
+
+    1.Open the Terminal application. Grab 64bit Google Chrome installer.
+    
+    2.Type the following command to download 64 bit version of Google Chrome:
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+    
+    3.Install Google Chrome and its dependencies on a CentOS/RHEL, type:
+    sudo yum install ./google-chrome-stable_current_*.rpm
+    
+    4.Start Google Chrome from the CLI:
+    google-chrome &
