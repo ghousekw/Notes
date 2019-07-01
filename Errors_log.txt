@@ -1,0 +1,7 @@
+Error:
+django can't find new sqlite version? (SQLite 3.8.3 or later is required (found 3.7.17))
+
+Solution:
+It is caused due to latest version of Django because they changed the sqlite version.
+So i roll back to previous version which is,django==2.1
+Then it works perfectly fine!!

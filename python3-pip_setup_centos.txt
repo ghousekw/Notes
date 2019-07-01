@@ -1,0 +1,21 @@
+Install Python PIP on CentOS7:
+------------------------------
+
+step.1: First update the package repository cache of yum package manager with the following command
+  $ sudo yum makecache
+
+setp.2: Python PIP is not available in the official package repository of CentOS 7. But it is available in the EPEL package repository. Before you can install Python PIP on CentOS 7, you must add EPEL repository to your CentOS 7.
+  $ sudo yum install epel-release -y
+
+setp.3: Now update the package repository cache of your CentOS 7 again with the following command
+  $ sudo yum makecache
+
+step.4: You can run the following command to search for a Python 3 PIP package,then it will show you available version of python3 like python34/python36 it depends on currently running version
+  $ sudo yum search pip | grep python3
+
+step.5: Now you can install Python 3 PIP with the following command:
+  $ sudo yum install python36-pip -y
+
+step.6: Now you can check whether Python 3 PIP is working with the following command:
+  $ pip3 -V
+
