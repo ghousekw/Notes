@@ -34,4 +34,7 @@ Root Password: adminuser
 
 5.After bootup enter username and Password
 
+6.Download and install Virtualbox guest from the below Link
+http://download.virtualbox.org/virtualbox/5.1.30/VBoxGuestAdditions_5.1.30.iso
+
 
