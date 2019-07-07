@@ -1,0 +1,125 @@
+Deleting Files
+Copying Files
+Moving Files
+Renaming Files
+Compress Files
+Creating archives
+
+Removing files:
+---------------
+rm file    Remove file
+rm -r dir  Removes the directory and its                contents recursively.
+rm -f file Force removal and never prompt               for confirmation
+
+Ex:
+ls s*
+rm s*
+rm .*
+ls -d .*
+
+Copying Files:
+--------------
+cp source_file destination_file
+    -Copy source_file to destination_file
+
+cp src_file1 [src_fileN ...] dest_dir
+    -Copy source_files to destination_dir
+
+cp -i
+    Run in interactive mode.
+
+cp -r source_dir destination_dir
+    Copy src_dir recursively to dest_dir
+
+Ex:
+cp file1 file2
+diff file1 file2
+mkdir dir 
+cp file1 file2 file3
+ls dir
+cp -i file1 file2
+cp -r dir dir2
+ls dir2
+cp dir dir3
+mkdir dir3
+cp -r dir dir2 dir3
+ls dir3
+tree dir3
+
+Moving and Renaming files:
+--------------------------
+mv  Move or rename files and directories
+mv source destination
+mv -i source destination
+Ex:
+mv dir firstdir
+ls
+mv file1 file1.renamed
+ls
+cd firstdir
+cat file1
+cat file2
+mv file1 file2
+ls
+mv -i file1.renamed file2
+
+Sorting Data:
+-------------
+sort file    sort text in file
+
+sort options:
+-------------
+-k F Sort by key. F is the field number.
+-r Sort in reverse order
+-u Sort unique
+Ex:
+cat more-secrets
+sort more-secrets
+sort -u more-secrets
+sort -ru more-secrets
+sort -u -k2 more-secrets
+
+Creating a Collection of files:
+-------------------------------
+tar [-] c |x|t f tarfile [pattern]
+Create,Extract or list contents of a tar archive using pattern, if supplied.
+
+tar options:
+------------
+c      Create a tar archive
+x      Extract files from the archive
+t      Display the table of contents(list).
+v      Be verbose
+z      Use compression
+f file Use this file
+Ex:
+ls tpsreports
+tar cf tps.tar tpsreports
+tar tf tps.tar
+tar xf /home/jason/tps.tar
+ls -l tpsreports
+tar xvf /home/jason.tps.tar
+
+Compressing files to save space:
+--------------------------------
+gzip    compress files.
+gunzip  Uncompress files.
+gzcat   Concatenates compressed files.
+zcat    Concatenates compressed files.
+
+Disk Usage:
+-----------
+du     Estimates file Usage
+du -k  Display sizes in kilobytes.
+du -h Display sizes in human readable format.
+
+Ex:
+du -k data
+gzip data
+ls data*
+du -k data.gz
+ls data*
+du -k data
+tar zcf tps.tgz  / tar zcf tps.tar.gz
+tar ztvf tps.tgz
+
