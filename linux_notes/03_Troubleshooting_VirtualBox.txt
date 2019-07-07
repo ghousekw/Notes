@@ -16,7 +16,6 @@ Solution: Enable Virtualization in BIOS
 
 3.This kernel requires an x86-64 CPU but only detected an i686 CPU. This processor is unsupported in CentOS 7.
 
-Solution: Goto your Virtualbox settings and select that virtual machine that you have problem and in the version select 64 bit version name of your machine for ex Red hat 64Bit.
+Solution: Goto your Virtualbox settings and select that virtual machine that you have problem and in the version, select 64 bit version name of your machine for ex Red hat 64Bit.
 
-When in doubt...
-Reboot
+4.When you are in doubt... don't know what the possible solution then simply Reboot and check the status

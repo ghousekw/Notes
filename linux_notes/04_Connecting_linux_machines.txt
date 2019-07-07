@@ -10,9 +10,11 @@ Connecting Directly:
 
 Connecting Over the Network:
 ----------------------------
-. SSH(Secure Shell)
+. Linux - SSH(Secure Shell) //same as we do in Mac
+
 . Windows - PuTTY
     -Open PuTTy and enter hostname/ipaddress to login
+
 . Mac - Terminal/sshcommand line utilty
     -open terminal
     -ssh hostname/ipaddress
