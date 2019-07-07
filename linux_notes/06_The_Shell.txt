@@ -1,0 +1,35 @@
+What is the shell:
+How to access it
+About superuser account
+
+What is shell?
+Command Line interface to linux operating system
+Default user interface for the linux system when you are over network
+A programm that accepts your commands and executes those commands
+Also called as interpreter
+CLI vs GUI:
+-----------
+The CLI is more powerful than GUI
+There will always be a CLI
+Server distributions do not include GUIs
+Desktop distributions have GUIs and CLIs
+
+Prompt/Shell Prompt:
+--------------------
+Just site there and wait for your instructions
+[adminuser@linuxsvr ~]$ -Prompt
+# - root
+$ - user
+~ - home directory
+  ex. ~jason = /home/jason
+      ~pat   = /home/pat
+      ~root  =  /root
+      ~/ftp  =  /srv/ftp
+
+Root, the superuser:
+--------------------
+Root is all powerfull superuser
+Normal accounts can only do a subsets of things to do.
+Root access is typically restricted to system administrators
+Root access may bre required to install, start, or stop an application
+Day to day activities willl be performed by using normal accounts
