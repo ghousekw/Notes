@@ -1,0 +1,55 @@
+Two commands that will allow you to find files and directories.
+
+The find command:
+-----------------
+find [path...] [expression]
+
+Recursively finds files in path that match expression. if no arguments are supplied it find all files in the current directory.
+
+find Options:
+-------------
+-name pattern    Find files and directories that                   match pattern
+-iname pattern   Like -name,but ignores case.
+-ls              performs an ls on each of the                     found items.
+
+-mtime days      Finds files that are days old
+-size num        Finds file that are of size n
+-newer file      Finds files that are newer than                   file.
+-exec command    {} \;
+Run command against all the files that are found.
+
+find
+find .
+find /sbin -name makedev
+find /sbin -iname makedev
+find /sbin -name MAKEDEV
+find /bin -name *v
+find . -mtime +10 -mtime -13
+find . -name s* -ls
+find . -size +1M
+find . -size +1G
+find . -type d -newer file.txt
+ls -l file.txt
+ls -ld tpsreposts
+find . -exec file {} \;
+file .bash_profile
+
+A fast Find - locate:
+---------------------
+locate pattern
+
+. lists files that match pattern.
+. Faster than the find command.
+. Queries an index
+. Results are not in real time
+. May not be enabled on all systems
+Ex:
+locate sales
+locate tpsreposts
+touch tpsreposts/new-file
+locate tpsreposts
+locate new-file
+find . -name new file
+
+
+
