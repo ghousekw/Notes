@@ -1,0 +1,202 @@
+Different ways to display the contents of a file
+How to use the Nano editor
+
+Displaying the contents of files:
+---------------------------------
+cat  file Displays the contents of file.
+more file Browse through a text file.
+less file More features than more.
+head file Output the beginning(or top portion of            file)
+tail file output the ending(or bottom portion of            file)
+
+Head and Tail:
+--------------
+. Displays only 10 lines by default.
+. Change this behaviour with -n
+   . n= number of lines
+   . tail-15 file.text
+
+Viewing files in Real Time:
+---------------------------
+tail -f file Follow the file.
+Displays data as it is being written to the file.
+Ex:
+cat file.txt
+head file.txt
+head -2 file.txt
+tail file.txt
+tail -1 file.txt
+cd /usr/local/my-app
+more my-app.log
+   Press spacebar for paging down
+   Press Enter to down one line
+   Press q to quit
+less my-app.log
+tail -f my-app.log
+
+Editors: Nano:
+--------------
+. Nano is a simple editor
+. Easy to learn
+. Not as advanced as vi or emacs
+. if nano isn't available, look for pico
+Ex:
+nano file.txt
+
+Editors: vi:
+------------
+. Has advanced and powerful features
+. Not intuitive
+. Harder to learn than nano
+. Requires a time investment
+
+vi   [file]  - Edit file
+vim  [file]  - Same as vi, but more features.
+view [file]  - Starts vim in read-only mode.
+
+Vi Command Mode and Navigation:
+-------------------------------
+k - Up one line.
+j - Down one line
+h - Left one character
+l - Right one character
+w - Right one word
+b - Left one word
+^ - Goto the beginning of line
+$ - Goto End of line
+        
+       /\
+        |
+<--h    j    k    l-->   
+             |
+             \/
+
+Vi Insert Mode:
+---------------
+i - insert at the cursor position.
+I - Insert at the beginning of the line.
+a - Appendd after the cursor position.
+A - Append at the end of the line.
+
+Vi Line Mode:
+-------------
+:w   -  Writes(saves) the file.
+:w!  -  Forces the file to be saved
+:q   -  quit
+:q!  -  quit without saving changes
+:wq! -  write and quit
+:x   -  same as :wq
+
+:n Postions the cursor at line n.
+:$ Postions the cursor on the last line.
+:set nu Turn on line numbering.
+:set nonu Turn off line numbering
+:help [subcommand] Get help
+
+Vi Modes:
+---------
+Mode          Key
+Command       ESC
+Insert        i l a A
+Line          :
+
+Vi - Repeating Commands:
+------------------------
+. Repeat a command by preceding it with a number.
+  . 5k = Move up a line 5 times
+  . 80i<Text><ESC>=Insert<Text>80 times
+  . 80i_<ESC>=Insert 80 "_" characters
+
+Vi - Deleting Text:
+-------------------
+x  Delete a character
+dw Delete a word
+dd Delete a line
+D  Delete from the current position
+
+Vi - Changing Text:
+-------------------
+r  - Replace the current character
+cw - Change the current word
+cc - Change the current line
+c$ - Change the text from the current position
+C  - Same as c$
+~  - Reverses the case of a character.
+
+Vi - Copying and Pasting:
+-------------------------
+yy          Yank(copy) the current line
+y<position> Yank the <position>
+p           Paste the most recent deleted or                  yanked text
+
+Vi - Undo/Redo:
+---------------
+u     - Undo
+Ctrl-R- Redo
+
+Vi -Searching:
+--------------
+/<pattern> Start a forward search
+?<pattern> Start a reverse search
+
+Ex:
+vi file.txt
+
+:set nu  - to set line number.
+
+Editors: Emacs:
+---------------
+. Powerful editor
+. Some people prefer vi, other emacs.
+. Either are great editors.
+. Use what feels comfortable to you.
+
+emacs [file] Edit file
+C - <char> Ctrl while pressing <char>
+M - <char> "Meta" key (alt key) while pressing               <char>
+M - <char> Esc, then type<char>
+
+C-h        help
+C-X C-c    Exit
+C-X C-s    Save the file
+C-h t      Build in tutorial
+C-h k <key>Describe Key
+
+Emacs Navigation:
+-----------------
+C-p Previous line.
+C-n Next line
+C-b Backward one character
+C-f forward one character
+M-f forward one word
+M-b Backward one word
+C-a Goto the beginning of the line
+C-e Goto the end of the line.
+M-< Goto the beginning of the file
+M-> Goto the end of the file
+
+Emacs - Deleting Text
+---------------------
+C-d Delete a character
+M-d Delete a word
+
+Emacs - Copying,Pasting and Undo
+--------------------------------
+C-k Kill(cut)
+C-y Yank(paste)
+C-x u Undo
+
+Emacs - Searching:
+------------------
+C-s Start a forward search
+C-r Start a reverse search
+
+Emacs - Repeating Commands:
+---------------------------
+C-u N <command> Repeat <command> N times
+
+Ex:
+emacs file.txt
+
+Various Graphical Editors:
+--------------------------
