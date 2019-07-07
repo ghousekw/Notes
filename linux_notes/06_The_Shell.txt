@@ -7,6 +7,7 @@ Command Line interface to linux operating system
 Default user interface for the linux system when you are over network
 A programm that accepts your commands and executes those commands
 Also called as interpreter
+
 CLI vs GUI:
 -----------
 The CLI is more powerful than GUI

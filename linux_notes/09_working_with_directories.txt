@@ -1,0 +1,59 @@
+How to use directory shortcuts
+How to execute commands outside of $PATH
+How to create and remove directories
+
+Directories:
+Are containers for other files and directories.
+provide a tree like structure
+Can be accessed by name or shortcut
+
+Directory Shortcuts:
+--------------------
+.    - This directory
+..   - Parent directory
+cd - - Change to previous directory
+  ex: cd dir_name
+      cd ..
+      cd /home/adminuser
+      cd /var/tmp
+      
+ *echo $OLDPWD - This will show previous directory where we were before.
+
+Directory Seperator:
+/    - Directory Seperator(/ forward slash)
+
+Executing Commands:
+-------------------
+$PATH determines command search path.
+You can specify a command with a full path
+you can execute command not in $PATH
+./command = Execute command in this dir.
+
+examples:
+echo $PATH
+
+which cat - Tells the path
+op: /bin/cat
+
+cat sales.data - Execute the file
+
+/bin/cat sales.data -Another way to open and execute
+
+/home/adminuser/my-cat/cat
+cd my-cat
+
+./cat
+explanation: 
+./ - If we want to execute something and we are in the same directory then we use "./filename"
+
+Creating and Removing Directories:
+----------------------------------
+mkdir [-p] directory - create a directory
+'p' stands for parent directory
+ex: mkdir -p /dir1/dir2/dir3
+explanation: It will only create directory when we use "-p" if we want to create multiple directories with parent directories.
+
+rmdir [-p] directory -remove a directory - It will only remove empty directory
+
+rm -rf directory - recursively removes directory
+

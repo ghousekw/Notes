@@ -1,0 +1,76 @@
+What the long listing format components are.
+How to see hidden files and directories.
+How to list files by type.
+How to list files sorted by time.
+How to handle spaces in file names.
+What symbolic links are.
+
+Decoding ls -l Output:
+----------------------
+$ls -l 
+-rw-rw-r-- 1 adminuser users 10400 jul 7 15:09 sales.data
+
+Permissions                 -rw-rw-r--
+Number of links             1
+Owner name                  adminuser
+Group name                  users
+Number of bytes in the file 10400
+Last modification time      jul 7
+file name                   sales.data
+
+Listing All files, Including Hidden Files
+------------------------------------------
+. Hidden files begin with a period
+   .sometimes called 'dot files'
+. Hidden files are not displayed by default
+. To show hidden files with ls, use ls -a.
+. Command options can be combined.
+  .ls -l -a is the same as -la and ls -al
+
+Listing Files by Type:
+----------------------
+Use 'ls -F' to reveal file types.
+/   - directory
+@   - link
+*   - executable
+
+Symbolic Links:
+---------------
+. A link is a points to the actual file or directory
+. Use the link as if it were the file.
+. A link can be used to create a shortcut
+    . Use for long file or directory name
+    . Use to indicate the current version of software
+ex: 
+ls -lF
+ls -F
+
+List files by time and in reverse:
+----------------------------------
+ls -t    List files by time
+ls -r    reverse order
+ls -latr long listing Including all files reverse sorted by time
+
+List files recursively
+ls -R
+
+The tree command:
+similar to ls -R but creates visual Output
+tree -d List directories only
+tree -c colorize Output
+
+List directories,not contents:
+ls -d List directory name not contents
+
+Listing files with color
+ls -color colorize the output
+
+Working with spaces in Names:
+Just say no to spaces!
+Alternatives:
+Hyphens(-)
+Underscores(_)
+CamelCase
+
+Encapsulate the entire file name in quotes
+Use a backslash(\) to escape spaces
