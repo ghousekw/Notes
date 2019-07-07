@@ -1,0 +1,83 @@
+What wildcards are
+when and where they are used
+The different types of wildcards
+How to use Wildcards with various commands
+
+Wildcards:
+----------
+. A character or string used for pattern matching.
+. Globbing expands the wildcard pattern into a list of files and/or directories.(paths)
+. Wildcards can be used with most commands
+ . ls
+ . rm
+ . cp
+
+. * - matches zero or more characters.
+  *.txt
+  . a*
+  . a*.txt
+
+? - matches exactly one character.
+  . ?.txt
+  . a?
+  . a?.txt
+
+More Wildcards - character Classes:
+-----------------------------------
+ . Matches any of the characters included between the brackets. Matches exactly one character.
+  . [aeiou]
+  . ca[nt]*
+    . can
+    . cat
+    . candy
+    . catch
+ . [!] - Matches any of the characters NOT included between the brackets. Matches exactly one character.
+   . [!aeiou]*
+   . cricket
+  
+More Wildcards - Ranges:
+------------------------
+. Use two characters seperated by a hyphen to create a range in a character class.
+. [a-g]*
+     - Matches all files that start with a,b,c,d,e,f or g.
+. [3-6]*
+     - Matches all files that start with 3,4,5 or 6
+
+Named character Classes:
+------------------------
+[[:alpha:]]
+[[:alnum:]]
+[[:digit:]]
+[[:lower:]]
+[[:space:]]
+[[:upper:]]
+
+Matching Wildcard patterns:
+---------------------------
+. \- escape character. Use if you want to match a wildcard character.
+  . match all files that end with a question mark:
+    . *\?
+       . done?
+
+Ex:
+ls -F
+ls *.txt
+ls ab.txt a.txt b.txt songs.txt
+ls a*
+ls a*.txt
+ls ?
+ls ??
+ls a?.txt
+ls a*.txt
+ls -l a*
+ls
+ls c[aeiou]t
+ls c[eioua]t
+ls-c[ueaoi]t
+ls [a-d]*
+mv *.txt notes
+ls notes
+mv *[[:digit:]]
+mv *.mp3 jazz.mp3
+ls ??
+lw - music vidoes
