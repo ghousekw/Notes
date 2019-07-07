@@ -1,0 +1,82 @@
+Linux Directory Structure
+Location Of Operating System components
+Application diretory structures
+
+Common Directories:
+-------------------
+
+. /  "Root" the top of the file system hierarchy.
+. /bin Binaries and other executable programs 
+    -They are called binaries because it contains source code in 0s and 1s which is machine readable format.
+. /etc System Configuration files
+. /home Home Directories
+. /opt Optional third party software
+. /tmp Temporary space, typically cleared on reboot.
+    - it will automatically clear the memory while reboot
+. /usr User related programs, lib and Docs.
+. /usr/bin Binaries and other executable programs
+. /usr/lib libraries
+. /usr/local Locally installed software that is not part of the base operating system.
+. /usr/sbin System admininstration binaries
+. /var Variable data, most notably log files
+. /var/log Log files
+. /cdrom Mount Point for CD-ROMs
+. /dev Device files, typically controlled by the operating system and the system admininstrators
+. /cgroup Control Groups hierarchy
+. /export shared file systems
+. /lib System libraries
+. /lib64 System libraries 64bit
+. /lost+found Used by the file system to store recovered files after a file system check has been performed
+. /media Used to mount removable media like CD-ROMs
+. /mnt Used to mount external file systems
+. /proc Provides info about running processes
+. /sbin System admininstration binaries
+. /selinux Used to display information about SELinux.
+. /srv Contains data which is served by the system
+. /srv/www Web Server files.
+. /srv/ftp FTP files
+. /sys Used to display and sometimes configure the devices known to the Linux Kernel
+
+Application Directory structures:
+---------------------------------
+Here crashplan is a backup software.
+. /usr/local/crashplan/bin
+. /usr/local/crashplan/etc
+. /usr/local/crashplan/lib
+. /usr/local/crashplan/log
+
+Here avg is an antivirus software
+. /opt/avg/bin 
+. /opt/avg/etc 
+. /opt/avg/lib 
+. /opt/avg/log
+
+Every application follows different patterns on storing their file Directory Structure
+. /etc/opt/myapp
+. /opt/myapp/bin
+. /opt/myapp/lib
+. /var/opt/myapp
+
+Sometimes application can also be stored on shared manners.
+. /usr/local/bin/myapp
+. /usr/local/etc/myapp.conf
+. /usr.local/lib/linmyapp.so
+
+Sometimes the companies or orgranization user their names for directory structuring
+
+Here acme is a company name
+. /opt/acme
+. /opt/acme/bin
+. /opt/acme/etc
+
+To similar above they also use their company/product name
+
+. /opt/google
+. /opt/google/chrome
+. /opt/google/earth
+
+Some Other examples are
+
+. /opt/web-team
+. /opt/acme/web-team
+. /usr/local/acme/web-team

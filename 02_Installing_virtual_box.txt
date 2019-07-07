@@ -1,0 +1,37 @@
+Installing Virtual Box on Windows:
+----------------------------------
+
+1.visit https://Virtualbox.org
+2.Install virtual box by clicking next/yes when neccessary.
+3.Open Virtualbox
+4.download and install https://7-zip.org
+
+Installing Virtual box on Mac:
+------------------------------
+1.visit https://Virtualbox.org
+2.Download and Open
+3.Open App store and download unarchiver
+
+Installing CentOS linux using an image for Virtualbox:
+--------------------------------
+Link to download an image:
+https://docs.google.com/uc?id=1RJUsoWAGCpuvyI9JwZ_JpdpFSid8AZiZ&export=download
+
+Login and Password Information for the Image:
+
+Username: adminuser
+Password: adminuser
+Root Password: adminuser
+
+1.click on new
+  -type name "your name"
+
+2choose ram
+
+3.click on use an existing virtual hard disk and navigate to an centos image we have downloaded.
+
+4.click start
+
+5.After bootup enter username and Password
+
+

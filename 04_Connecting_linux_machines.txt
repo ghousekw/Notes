@@ -1,0 +1,22 @@
+How to login into Linux
+What SSH is
+Which SSh clients to use
+
+Connecting Directly:
+  Open the terminal in GUI:
+    Just enter username and password to login
+  Open the terminal in CLI:
+    Terminal will be displayed then, just enter your username and password to login
+
+Connecting Over the Network:
+----------------------------
+. SSH(Secure Shell)
+. Windows - PuTTY
+    -Open PuTTy and enter hostname/ipaddress to login
+. Mac - Terminal/sshcommand line utilty
+    -open terminal
+    -ssh hostname/ipaddress
+    -ssh username@linuxservername/ipaddress
+      ex:ssh adminuser@linuxsvr
+      ex:ssh linuxsvr.yourcompany.com
+      ex: ssh 10.0.0.4

@@ -1,0 +1,22 @@
+-Linux is an Operating system.
+
+-Operating system is a collection of softwares.system softwares are bundled together and called as OS
+
+Distro/Flavor = Distribution
+Linux Kernel is the core
+Linux Kernel + Apps = Distro
+
+Two most popular Linux Distributions are Redhat and Ubuntu.
+
+Redhat:
+Popular in Banks, Airlines, Telecoms,Healthcare
+  -Derivative CentOS
+
+Ubuntu:
+Popular in Startups, Saas, Social Networks, Cloud Based.
+
+Linux concepts are universal.
+
+Linux Distro = Kernel +software
+RHEL and Ubuntu
+CentOS = RHEL - branding/logos

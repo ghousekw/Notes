@@ -1,0 +1,22 @@
+Virtualbox Troubleshooting tips:
+--------------------------------
+1.Antivirus Conflicts:
+----------------------
+. Error in supR3HardenedWinReSpawm
+. VERR_OPEN_FAILED
+. E_FAIL(0*80004005)
+. NtCreateFile(\Device\VBoxDrvStub)failed
+
+Solution: Disable Antivirus
+
+2.This Kernel requires x86-64 CPU, but only detected an i686 CPU
+
+Solution: Enable Virtualization in BIOS
+-Advanced-bootoptions-Virtualization ->Enable
+
+3.This kernel requires an x86-64 CPU but only detected an i686 CPU. This processor is unsupported in CentOS 7.
+
+Solution: Goto your Virtualbox settings and select that virtual machine that you have problem and in the version select 64 bit version name of your machine for ex Red hat 64Bit.
+
+When in doubt...
+Reboot
