@@ -1,0 +1,8 @@
+Git Errors logs:
+----------------
+Git refusing to merge unrelated histories on rebase
+fatal: refusing to merge unrelated histories
+Error redoing merge 1234deadbeef1234deadbeef
+
+soltion:
+  git pull origin branchname --allow-unrelated-histories
