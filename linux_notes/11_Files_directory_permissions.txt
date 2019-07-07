@@ -1,0 +1,197 @@
+Symbolic Permissions
+Numeric/Octal Permissions
+File versus directory Permissions
+Changing Permissions
+Working with groups
+File creation mask
+
+Permissions:
+------------
+
+$ ls -l
+-rw-rw-r-- 1 adminuser users 10400 Jul 07 16:25 sales.data
+
+Symbol           Type
+   -            Regular File
+   d            directory
+   |            Symbolic link
+   r            read
+   w            write
+   x            execute
+
+Permission            file                    Directory
+Read(r)         Allows a file to be read     Allows files names in the direcory to be read
+
+Write(w)        Allows a file to modified    Allows entries to be modified within the direcory
+
+Execute(x)      Allows the execution of a    Allows access to contents and metadata for entries
+                file 
+
+Symbol       category
+  u            users
+  g            groups
+  o            others
+  a            all
+
+Groups:
+. Every user is in at least one group.
+. Users can belong to many groups.
+. Groups are used to organize users.
+. The groups command displays a user's groups.
+. You can slo use id -Gn.
+EX: 
+groups
+id -Gn
+groups pat
+groups adminuser
+
+Type
+|
+-rw-rw-r--r--
+  |  |     |
+ user|   others
+     |
+    Group
+
+Changing Permissions:
+---------------------
+Item                       Meaning
+chmod                 change mode command
+ugoa                  user category user,group,
+                      other all
++-=                   add,subtract, or set                                Permissions
+rwx                   Read, Write, Execute
+
+Ex:
+chmod g+w sales.data
+chmod g-w sales.data
+chmod g+wx sales.data
+chmod u+rwx,g-x sales.data
+chmod a=r sales.data
+chmod u=rwx,g-rx,o= sales.data
+
+Numeric Based Permissions:
+--------------------------
+r           w            x
+0           0            0   value for off
+1           1            1   Binary value for on
+4           2            1   Base 10 value for on
+
+Order Has Meaning:
+------------------
+             U           G                O
+Symbolic    rwx         r-x               r--
+Binary      111         101               100
+Decimal      7           5                 4
+
+Comminly Used Permissions:
+--------------------------
+Symbolic          Octal
+-rwx-----         700
+-rwxr-xr-x        755
+-rw-rw-r--        664
+-rw-rw----        660
+-rw-r--r--        644
+
+Working with groups:
+--------------------
+. New files belong to your primary group
+. The chgrp command changes the group
+
+Ex:
+. adminuser 1 admin adminuser 50 Jul 7 16:53 Sales.data
+. groups
+. chgrp sales sales.data
+. ls -l sales.data
+. ls -ls /usr/local/Sales
+. mv sales.data /usr/local/sales
+. ls -l /usr/local/sales
+
+Directory Permissions Revisited:
+--------------------------------
+Permissions on a dire can effect the files in the directory.
+If the file permissions look correct, start checking directory permissions
+Work your way up to root
+Ex:
+ls -l my-cat
+my-cat/cat
+chmod 400 my-cat
+ls -ld my-cat
+ls -l my-cat
+my-cat/cat
+chmod 50 my-cat
+ls -ld my-cat
+my-cat/cat
+ls -l my-cat
+
+File creation mask:
+-------------------
+. File creation mask determines default permissions.
+. If no mask were used permissions would be:
+   . 777 for directories
+   . 666 for files
+
+The umask Command:
+------------------
+umask [-S] [mode]
+. sets the file creation mask to mode, if given.
+. use -S for Symbolic notation
+
+                       Directory         File
+Base Permission           777             666
+Subtract Umask           -022            -022
+Creations Permission      755             644
+
+                        Directory         File
+Base Permission           777             666
+Subtract Umask           -002            -002
+Creations Permission      775             664
+
+Octal Subtraction is an Estimation:
+-----------------------------------
+                        Directory         File
+Base Permission           777             666
+Subtract Umask           -007            -007
+Creations Permission      770             660*
+
+Common umask modes:
+-------------------
+. 022
+. 002
+. 077
+. 007
+
+Octal Binary Dir Perms File Perms
+0        0   rwx       rw-
+1        1   rw-       rw-
+2        10  r-x       r--
+3        11  r--       r--
+4       100  -wx       -w-
+5       101  -w-       -w-
+6       110  --x       ---
+7       111  ---       ---
+
+Special Modes:
+--------------
+. usmask 0022 is the same as umask 022
+. chmod 0644 is the same as chmod 644
+. The special modes are:
+ . setuid
+ . setgid
+ . sticky
+Ex:
+mkdir testumask
+cd testumask
+umask
+umask -S
+mkdir a-dir
+touch a-file
+ls -l 
+rmdir a-dir
+rm a-fir
+umask 007
+umask
+umask -S
+mkdir a-dir
+touch a-file
+ls -l
