@@ -1,0 +1,41 @@
+How to navigate man pages
+How the $PATH enivironment variable is used
+What the which command does
+How to ask commands for help
+How to search man pages
+
+Navigating main pages
+---------------------
+Enter move down one line
+Space mode down down one pages
+g move to top of the page
+G move to bottom of the page
+q Quit
+
+Enivornmental Variables:
+------------------------
+Storage location that has a name and a value
+Typically uppercase
+Access the contents by executing
+  $ echo $VAR_NAME
+
+PATH:
+-----
+An enivironment variable
+ controls the command search PATH
+contains a list of directories
+
+Which command exactly:
+-----------------------
+Which Locate a command
+  ex: which cat
+  /bin/cat
+
+man is used to display documentation.
+Searching Man Pages:
+--------------------
+man -k SEARCH_TERM  - When you are not sure which command to use.
+  ex: man -k calendar
+  op: cal
+      difftime
+

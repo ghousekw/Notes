@@ -1,0 +1,18 @@
+Some basic commands that are often used
+
+ls    - list directories
+cd    - changes the current directory
+pwd   - present/current working directory
+cat   - concatenates and dispaly files
+echo  - Display arguments to the screen
+man   - display online manual
+  ex: man ls
+exit  - exists the shell or your current session
+clear - clear the screen
+echo  - used to display content variables
+which - Locate the path of command
+
+* commands are case sensitive
+
+
+If we type 'cd' it will take you to home directory
