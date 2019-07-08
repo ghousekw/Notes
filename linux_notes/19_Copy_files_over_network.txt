@@ -1,0 +1,64 @@
+How to copy files over the network
+
+Copying files Over the Network:
+-------------------------------
+. SCP  - Secure Copy
+. SFTP - SSH file transfer protocol
+
+Command Line SCP Clients:
+-------------------------
+. scp
+. sftp
+. PuTTY Secure Copy Client - pscp.exe
+. PuTTY Secure File Trnasfer client            -psftp.exe
+
+Graphical SCP/SFTP clients:
+---------------------------
+. Cyberduck
+. FileZilla
+. WinSCP
+
+scp/sftp Command line utilities:
+--------------------------------
+scp source destination
+  Copy source to destination
+
+sftp host
+  Start a secure file transfer with host
+Ex:
+sftp jason@host
+
+ftp Command Line utility:
+-------------------------
+ftp host  
+  Start a file transfer session with host.
+  Not secure when compared to sftp
+  If you have given a choice, pick scp/sftp
+
+Ex:
+sftp linuxsvr
+password:
+pwd
+Remote Working directory: /home/jason
+ls
+lpwd
+Local Working directory: /tmp/test
+lls
+put z.txt
+ls
+rm z.txt
+ls -l
+quit
+
+scp z.txt linusvr:/tmp/
+scp z.txt linusvr:~/
+ssh linusvr
+ls z.txt
+ls /tmp/z.txt
+scp z.txt adminuser@linuxsvr:/home/adminuser/
+sftp adminuser@linuxsvr
+ls
+quit
+
+ 
+

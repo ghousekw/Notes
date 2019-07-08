@@ -1,0 +1,81 @@
+Shell prompt customization
+
+Customizing the Shell Prompt:
+-----------------------------
+. Use an environmant variable to customize.
+. Bash, ksh and sh use $PS1.
+. Csh, tcsh and zsh use $prompt.
+
+Customizing the Prompt with PS1:
+--------------------------------
+\d  Date in "Weekday Month Date" format "Tue May 26"
+\h  Hostname upto the first period
+\H Hostname
+\n Newline
+\t Current time in 24-hour HH:MM:SS format
+\T Current time in 12-hour HH:MM:SS format
+\@ Current time in 12-hour am/pm format
+\A Current time in 24-hour HH:MM format
+\u Username of the Current user
+\w Current working directory
+\W Basename of the Current working directory
+\$ if the effective UID is 0, a#, otherwise a$
+
+Persist PS1 Changes:
+--------------------
+$ echo 'export PS1 = "[\u@\h \w]\$"' >> ~/.bash_profile
+
+Ex:
+echo $PS1
+PS1="\u@\h \$"
+PS1="<\t \u@\h \w>\$"
+pwd
+cd /var/log
+PS1 = "\d \t \h \W>\$"
+pwd
+/var/log
+
+vi bash_profile
+#my custom prompt
+export PS1="[persist \u@\h \w]\$"
+PS1="\t\n[\h \w]\$"
+
+Shell Aliases:
+--------------
+Using Aliases:
+--------------
+. shortcuts
+. use for long commands
+. use for commands you type often
+
+Creating Aliases:
+-----------------
+alias [name[=value]]
+  List or create aliases.
+  Use name-value to create a new alias.
+
+. Fix Typos
+  $ alias grpe='grep'
+
+. Make Linux behave like another OS
+  $ alias cls="clear"
+
+Removing Aliases:
+-----------------
+unalias name  Remove the "name" alias.
+unalias -a    Remove all aliases.
+
+Persisting Aliases:
+-------------------
+. Add aliases to your personal initialization files.
+  . .bash_profile
+
+Ex:
+ls -l
+alias ll="ls-l"
+alias cls="clear"
+alias
+
+vi ~/.bash_profile
+#my custom aliases
+alias mycls="clear"

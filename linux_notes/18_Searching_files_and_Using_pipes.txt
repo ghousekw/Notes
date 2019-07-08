@@ -1,0 +1,99 @@
+How to search the contents of files
+What pipes are and how to use them
+
+The grep command:
+-----------------
+grep        Display lines matching a pattern
+Ex:
+grep pattern file
+
+grep Options:
+-------------
+-i  Performs a search, ignoring case.
+-c  Count the number of occurrences in a file
+-n  Precede output with line numbers
+-v  Invert Match. Print lines that don't match
+Ex:
+cat secret
+grep user secret
+grep o secret
+grep -v o secret
+grep User secret
+grep -i User secret
+grep -ci User secret
+grep -ni user secret
+
+The file command:
+-----------------
+file file_name Display the file type.
+Ex:
+$ file sales.data
+sales.data: ASCII text
+$ file *
+bin: directory
+jason.tar: POSIX tar archive
+
+Searching for Text in Binary Files:
+-----------------------------------
+Strings   Display printable Strings
+
+Pipes:
+------
+
+|   Pipe symbol
+
+command-output  | command-input
+
+Ex:
+grep pattern file
+cat file | grep pattern
+
+The Cut command:
+----------------
+cut[file]   cut out selected portions of file. If file is omitted, use standard input.
+
+cut Options:
+------------
+-d delimiter  Use delimiter as the field separator.
+-f N          Display the Nth field.
+Ex:
+cd Music/juzz
+ls
+grep -i john gaint-steps.mp3
+file gaint-steps.mp3
+cat gaint-steps.mp3
+strings gaint-steps.mp3
+strings gaint-steps.mp3 | grep -i john
+strings gaint-steps.mp3 | grep -i john | head -1
+strings gaint-steps.mp3 | grep -i john | head -1 | cut -d' '  -f2
+
+Searching and Pipe example:
+---------------------------
+Ques:
+. Find all users named "bob" in /etc/passwd
+. Prints account name and real name
+. Print in alphabetical order by account name.
+. Print in a tabular format.
+
+Sol:
+grep bob  /etc/passwd
+grep bob  /etc/passwd | cut -d: -f1,5
+grep bob  /etc/passwd | cut -d: -f1,5 | sort
+grep bob  /etc/passwd | cut -d: -f1,5 | sort  | tr ":" " "
+grep bob  /etc/passwd | cut -d: -f1,5 | sort  | tr ":" " "  | column -t
+
+Piping output to a pager:
+-------------------------
+. more
+. less
+Ex:
+cat /etc/passwd
+cat /etc/passwd | less
+less /etc/passwd
+grep bin /etc/passwd
+grep bin /etc/passwd  | less
+
+
+
+
+

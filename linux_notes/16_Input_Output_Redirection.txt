@@ -1,4 +1,59 @@
 1. Three I/O types
 2. Redirection
 
-I/O Name        Abbrevation File description
+I/O Name        Abbrevation      File description
+Standard Input    stdin             0
+Standard Output   stdout            1
+Standard Error    stderr            2
+
+Redirection:
+------------
+
+>      Redirects Standard Output to a file.
+       Overwrites(truncates) existing contents.
+
+>>     Redirects Standard Output to a file.
+       Appends to any existing contents
+
+<      Redirects input from a file to a command.
+
+&      Used with redirection to signal the file         descriptor is being used.
+
+2>&1   Combine stderr and Standard Output
+
+2>file Redirect Standard Error to a file.
+
+The Null Device:
+----------------
+>/dev/null    Redirects Output to nowhere.
+
+$ ls here not-here 2> /dev/null
+$ ls here not-here 2> /dev/null 2
+
+Ex:
+ls -l
+ls -l > files.txt
+cat files.txt
+ls >> files.txt
+less files.txt
+sort < files.txt
+ls -l > files.txt
+ls -l 1>files.txt
+ls -l > files.txt
+sort < files.txt > sorted_files.txt
+cat sorted_files.txt
+ls files.txt note-here
+ls files.txt note-here > out
+cat out
+ls files.txt not-here 2> out.err
+cat out.err
+ls files.txt not-here 1>out 2>out.err
+cat out.err
+ls files.txt not-here 1>out 2>out.err
+cat out
+cat out.err
+ls files.txt not-here > out.both 2>&1
+cat out.both
+ls files.txt not-here 2>/dev/null
+ls files.txt not-here >/dev/null
+ls files.txt not-here >/dev/null 2>&1

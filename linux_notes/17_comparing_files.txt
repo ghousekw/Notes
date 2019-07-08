@@ -1,0 +1,47 @@
+How to compare the contents of the file.
+
+Comparing the contents of files:
+--------------------------------
+diff file1 file2        compare two files.
+sdiff file1 file2       side-by-side comparison.
+vimdiff file1 file2     Highlight differences in                         vim
+
+
+LineNumFile1-Action-LineNumFile2
+Action = (A)dd(C)hange(D)elete
+
+$diff file1 file2
+1c1
+...
+
+< This is a line 1 from file1
+---
+> This is a line 2 from file2
+
+< Line from file1
+> Line from file2
+
+sdiff output:
+-------------
+$sdiff file1 file2
+line in file1 | line in file2
+                more in file2
+
+| Differing Lines
+< Line from file1
+> Line from file2
+
+vimdiff:
+--------
+Ctrl-w w  Goto next window
+:q        Quit(close current window)
+:qa       Quit all(close both files)
+:qa!      Force quit all
+
+Ex:
+cat -n secret
+cat -n secret.bak
+diif secret secret.bak
+sdiff secret secret.bak
+echo new last line >> secret
+vimdiff secret secret.bak
