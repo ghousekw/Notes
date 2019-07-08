@@ -1,0 +1,95 @@
+List running process
+Foreground vs Background processes.
+Launch background processes.
+Kill processess.
+
+List processes and Information:
+-------------------------------
+ps      Display process status
+
+ps Options:
+-----------
+-e          Everything all processes
+-f          Full format List
+-u username Display username's processes
+-p pid      Display Information for PID.
+
+Common ps commands:
+-------------------
+ps -e           Display all processes.
+ps -ef          Display all processes,full.
+ps -eH          Display a process tree.
+ps -e --forest  Display a process tree.
+ps -u username  Display user's processes.
+
+Other ways to view processes:
+-----------------------------
+pstree    Display processes in a tree format
+top       Interactive process viewer
+htop      Interactive process viewer
+
+Ex:
+ps
+ps -p 1530
+ps -f
+ps -e
+ps -ef | less
+ps -fu | jason
+ps -fu root
+ps --forest
+ps -ef --forest
+pstree
+top
+htop
+Background and Foreground processes:
+------------------------------------
+command & start command in background.
+ctrl-c    kill the foreground process.
+ctrl-z    Suspend the foreground process.
+bg[%num]  Background a suspended process.
+fg[%num]  Foreground a background process.
+kill      kill a process by job number or PID
+jobs[%num]List Jobs
+
+killing processes:
+------------------
+ctrl-c          Kills the foreground process.
+kill [-sig] pid Send a signal to a process
+kill -l         Display a list of signals.
+Ex:
+kill 123
+kill -15 123
+kill -TERM 123 kill -9 123
+./long-running-program &
+ps -p 2373
+jobs
+jobs %1
+fg
+jobs
+./long-running-program &
+./long-running-program &
+./long-running-program &
+jobs
+%% %+ %-^C
+jobs %%
+jobs %+
+jobs %-
+jobs
+fg %2
+jobs
+fg 1
+jobs
+bg %1
+jobs
+kill %1
+jobs
+%3
+fg
+jobs
+kill -KILL ^C
+./long-running-program &
+kill 2394
+kill -l 2396
+
+
+

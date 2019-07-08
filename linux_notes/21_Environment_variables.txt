@@ -1,0 +1,70 @@
+What environment variables are.
+What they do.
+How to control them.
+
+Environment Variables:
+----------------------
+. Name/value pairs.
+. Can change how an application behaves.
+. An Example Environment Variable:
+  . EDITOR = nano
+
+Viewing Environment Variables:
+------------------------------
+$printenv
+HOSTNAME=web01
+TERM=xterm
+SHELL=/bin/bash
+HISTSIZE=1000
+USER=jason
+MAIL=/var/spool/mail/vagrant
+PATH=/usr/bin:/usr/sbin:/sbin:/usr/sbin
+PWD=/home/jason
+HOME=/home/jason
+
+$printenv HOME
+/home/jason
+
+$printenv home
+
+Creating Environment Variables:
+-------------------------------
+Syntax:
+  export VAR="value"
+
+Examples:
+  export EDITOR = "vi"
+  export TZ = "US/pacific"
+
+Removing Environment Variables:
+-------------------------------
+Syntax:
+  unset VAR
+Example:
+  unset TZ
+
+Persisteing Environment Variables:
+----------------------------------
+$cat ~/.bash_profile
+export TZ="US/Central"
+
+Ex:
+$printenv
+$printenv | less
+$printenv PATH
+echo $PATH
+date
+export TZ="US/Pacific"
+date
+unset TZ
+date
+
+vi .bash_profile
+#user specific environment and startup programs
+export TZ="US/pacfic"
+
+ssh web01
+echo $TZ
+date
+man date
+

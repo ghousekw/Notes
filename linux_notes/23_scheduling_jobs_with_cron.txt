@@ -1,0 +1,84 @@
+Cron service
+Crontab format
+Crontab command
+
+Cron:
+-----
+. cron - A time based job scheduling service.
+. crontab - A program to create,read,update and delete your job schedules.
+. Use cron to schedule and automate tasks
+
+Crontab Format:
+---------------
+* * * * * command
+| | | | |
+| | | | +-- Day of week(0-6)
+| | | +---- Month of the year(1-12)
+| | +------ Day of the Month(1-31)
+| +-------- Hour(0-23)
++---------- Minute(0-59)
+
+Example Crontab Entry:
+----------------------
+#Run every Moday at 07:00
+0 7 * * 1 /opt/sales/bin/weekly-report
+| | | | |
+| | | | +-- Day of week(0-6)
+| | | +---- Month of the year(1-12)
+| | +------ Day of the Month(1-31)
+| +-------- Hour(0-23)
++---------- Minute(0-59)
+
+Redirecting Output:
+-------------------
+#Run at 02:00 every day and
+# send output to a log file
+0 2 * * * /root/backupdb > /tmp/db.log > 2&1
+
+Examples Contrab Entries:
+-------------------------
+#Run every 30 minutes.
+0,30  * * * * /opt/acme/sales/bin/half-hour-check
+
+#Another way to same thing
+0/2*   * * * * /opt/acme/sales/bin/half-hour-check
+
+#Run for the first 5 minutes of the hour
+0,4  * * * * /opt/acme/sales/bin/have-first
+self.
+
+Crontab Shortcuts:
+------------------
+@yearly     0 0 1 1 *
+@annually   0 0 1 1 *
+@monthly    0 0 1 * *
+@weekly     0 0 * * 0
+@daily      0 0 * * *
+@midnight   0 0 * * *
+@hourly     0 * * * *
+
+Using the crontab command:
+--------------------------
+crontab file Install a new crontab from file
+crontab  -l  List your cron jobs 
+crontab  -e  Edit your cron jobs 
+crontab  -r  Remove all of your cron jobs 
+
+Ex:
+crontab -l
+
+vi my-cron
+#Run every morning at 07:00
+0 7 * * 1 /opt/sales/bin/weekly-report
+
+cat my-cron
+crontab my-cron
+crontab -l
+echo $EDITOR
+EDITOR = vi
+crontab -e
+crontab -r
+crontab -l
+
+
+

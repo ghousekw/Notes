@@ -1,0 +1,70 @@
+How to switch to another account.
+How to run commands as others.
+
+The su Command:
+---------------
+su [username]   Change UserID or become superuser
+
+su Options:
+-----------
+    -             A hyphen is used to provide an  environment similar to what the user would expect has the user logged in directly.
+
+    -c Command    Specify a command to be executed.
+
+WhoAmI:
+-------
+whoami      Displays the effective username.
+
+Ex:
+$ whoami
+jason
+$su oracle
+password:
+$ whoami
+oracle
+
+export TEST=1
+echo $TEST
+1
+su oracle
+password:
+echo $TEST
+1
+whoami
+oracle
+exit
+su - oracle
+password:
+pwd
+exit
+su -c 'echo $ORACLE_HOME' oracle
+password:
+su -c 'echo $ORACLE_HOME' - oracle
+password:
+/u01/app/oracle/product/current
+
+Sudo - Super User Do:
+---------------------
+sudo    Execute a command as another user,
+        typically the superuser.
+
+Using Sudo:
+-----------
+sudo    -l              List available 
+                        commands.
+sudo  command           Run command as root
+sudo    -u root command Same as above
+sudo    -u user command Run as user
+sudo    su              Switch to the 
+                        superuser account.
+sudo    su  -           Switch to the 
+                        superuser account with root environment.
+sudo    su  - username  Switch to the 
+                        username account.
+sudo    -s              Start a shell
+sudo    -u root -s      Same as sudo -s
+sudo    -u user -s      Start a shell as 
+                        user.
+
+Ex:
+su -l
