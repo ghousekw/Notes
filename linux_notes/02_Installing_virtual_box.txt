@@ -28,13 +28,10 @@ Root Password: adminuser
 
 2choose ram
 
-3.click on use an existing virtual hard disk and navigate to an centos image we have downloaded.
+3.click on use an existing virtual hard disk and navigate to an centos image if we have downloaded from above link.
 
 4.click start
 
 5.After bootup enter username and Password
-
-6.Download and install Virtualbox guest from the below Link
-http://download.virtualbox.org/virtualbox/5.1.30/VBoxGuestAdditions_5.1.30.iso
 
 

@@ -1,0 +1,4 @@
+1. Three I/O types
+2. Redirection
+
+I/O Name        Abbrevation File description

@@ -35,6 +35,8 @@ Common Directories:
 
     . /var/log Log files
 
+. /sys Used to display and sometimes configure the devices known to the Linux Kernel
+
 . /cdrom Mount Point for CD-ROMs
 
 . /dev Device files, typically controlled by the operating system and the system admininstrators
@@ -62,8 +64,6 @@ Common Directories:
     . /srv/www Web Server files.
 
     . /srv/ftp FTP files
-
-. /sys Used to display and sometimes configure the devices known to the Linux Kernel
 
 Application Directory structures:
 ---------------------------------
