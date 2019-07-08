@@ -1,0 +1,94 @@
+Shell History
+Exclamation Mark Syntax
+Autocompletion
+
+Shell History:
+--------------
+. Executed commands are added to the history.
+. Shell history can be displayed and 
+  recalled.
+. Shell history is stored in memory and on
+  disk.
+  . ~/.bash_history
+  . ~/.history
+  . ~/.histfile
+
+history Command:
+----------------
+history   Displays the shell history.
+HISTSIZE  Controls the number of commands to           retain in history
+
+export HISTSIZE=1000
+
+!Syntax:
+--------
+!N        Repeat Command line number N.
+!!        Repeat the previous command line.
+!string   Repeat the most recent command     
+          starting with "string"
+
+More ! Syntax:
+--------------
+!:N <Event> <Separator> <Word>
+!   Represents a command line(or event).
+    ! = The most recent command line.
+    ! = !!
+
+: N Represents a word on the command line.
+    0= command, 1=first argument,etc
+
+$head files.txt sorted_files.txt notes.txt
+<Output from head command here>
+$ !!
+head files.txt sorted_files.txt notes.txt
+<Output from head command here>
+$ vi !:2
+vi sorted_files.txt
+<vi editor starts>
+
+Even More ! Syntax:
+-------------------
+!^  Represents the first argument.
+    !^  = !:1
+!$  Represents the last argument.
+$head files.txt sorted_files.txt notes.txt
+!^=files.txt
+!$=notes.txt
+
+Searching Shell history:
+------------------------
+Ctrl-r    Reverse shell history search
+Enter     Execute the command
+Arrows    Change the command
+Ctrl-g    Cancel  the search
+
+Tab Completion:
+---------------
+. Tab Autocompletion
+  . Commands
+  . Files,directories,paths
+  . Environment Variables
+  . Usernames(~)
+
+Ex:
+history
+!1
+echo $HISTSIZE
+!!
+!h
+!2
+ls files.txt sorted_files.txt notes.txt
+!!
+echo !:2
+!l
+echo !$
+!l
+echo alpha bravo charlie
+echo !^ !l:2 delta !l:0
+echo alpha sorted_files.txt
+echo $HIST
+echo $HISTSIZE
+ls -ld ~
+ls -ld !adm
+ls -ld !adminuser/
+

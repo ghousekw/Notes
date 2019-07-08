@@ -1,0 +1,184 @@
+Partitions
+MBR
+GPT
+Mount points
+fdisk
+
+Partitions:
+-----------
+. Disks can be divided into parts, called Partitions.
+. Partitions allow you to seperate data.
+. Partitioning schemes
+  . 1)OS,2)Application,3)User,4)Swap
+  . 1)OS,2)User home directories
+  . As a system administrator, you decide.
+
+Partitioning:
+--------------
+. can protect the overall system.
+. keep users from creating outages by using a home directory partition.
+$df -h
+
+MBR:
+----
+. Master Boot Record
+. Can only address 2 TB of disk space.
+. Being phased out by GPT
+  . GPT = GUID Partition Table.
+. $ Primary Partitions
+. Extended Partitions allow you to create logical partitions.
+
+GPT:
+----
+. GPT = GUID partition Table
+. GUID = Global Unique Identifier
+. Replcaing the MBR Partitioning scheme
+. Part of UEFI
+. UEFI = Unified Extensible Firmware Interface
+. UEFI is Replcaing BIOS.
+. Supports upto 128 partitions
+. Supports upto 9.4 ZB disk sizes.
+. Not supported by older operating systems.
+. May require newer or special tools.
+
+Mount Points:
+-------------
+. A directory used to access the data on a partition.
+. /(slash) is always a mount point.
+. /home
+  ./home/jason is on the partition mounted on /home
+. /export/home
+  . /export/home/jason
+
+Mounting over existing data:
+----------------------------
+mkdir /home/sarah
+mount /dev/sdb2 /home
+* You will not be able to see /home/sarah now.
+
+umount /home
+* You can now see /home/sarah again.
+
+Mount Points on Mount Points:
+-----------------------------
+/home
+/home/jason
+
+fdisk:
+------
+. Alternatives:gdisk,parted
+. Earlier Versions of fdisk did not supported GPT.
+fdisk /path/to/device
+
+creating partitions with fdisk:
+-------------------------------
+.fdisk
+. MBR
+. GPT
+
+fdisk -l | less - to display list of devices.
+
+File Systems:
+-------------
+creating file systems
+Mounting file systems
+Unmount file systems
+How to prepare swap space for use
+File System Table
+Disk UUIDs and Labels
+
+.ext = Extended file system
+  . ext2,ext3 and ext4 are later releases.
+  . Often the deafult file system type.
+. Other file systems
+  . Reiser FS
+  . JFS
+  . XFS
+  . ZFS
+  . Btrfs
+mkfs:
+-----
+mkfs -t TYPE DEVICE
+mkfs -t ext3 /dev/sdb2
+mkfs -t ext4 /dev/sdb3
+mkfs.ext4 /dev/sdb3
+
+# ls -l /sbin/mkfs*
+/sbin/mkfs
+/sbin/mkfs.btrfs
+/sbin/mkfs.cramfs
+/sbin/mkfs.ext2
+/sbin/mkfs.ext3
+/sbin/mkfs.ext4
+/sbin/mkfs.minix
+/sbin/mkfs.xfs
+
+Mounting with mount:
+--------------------
+mount DEVICE MOUNT_POINT
+
+mount /dev/sdb3 /opt
+
+The mount command:
+------------------
+#mount
+proc on /proc type proc (rw,nosuid,nodev,noexec,realtime)
+sysfs on /sys type sysfs (rw, nosuid, nodev,noexex, realtime)
+tmpfs on /dev/shm type tmpfs(rw,nosuid,nodev)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,mode=755)
+...
+/dev/sda2 on /type xfs (rw,realtime,attr2,inode64,noquota)
+/dev/sdb3 on /opt type ext4 (rw,realtime,data=oredered)
+
+The df command:
+---------------
+#df -h
+
+Manual mounts do not persist:
+-----------------------------
+In order to amke mounts persist between reboots, add an entry in the /etc/fstab file.
+
+Unmount with the umount command:
+--------------------------------
+umount DEVICE_OR_MOUNT_POINT
+
+umount /opt
+umount /de/sdb3
+
+Preparing swap space:
+---------------------
+#mkswap /dev/sdb1
+Setting up swapspace version 1, size = 1048752 KiB
+no label, UUID=646dc5s-54aad-354
+sd-3a2s4d6f84s
+#swapon /dev/sdb1
+#swapon -s
+Filename  Type    size    used    Priority
+/dev/sdb1 Partition 201542  0     -1
+/dev/sdb1 Partition 321542  0     -2
+
+/etc/fstab - The File System Table:
+-----------------------------------
+. Controls what devices get mounted and where on boot.
+. Each entry is made up of 6 fields.
+  . device
+  . mount point
+  . file system type
+  . mount options
+  . dump
+  . fsck order
+
+Sample /etc/fstab file:
+-----------------------
+#device     mount point FS  options dump fsck
+/dev/sdba2  /           xfs defaults  0   1
+/dev/sdba1  swap        swap defaults 0   0
+
+Viewing Labels and UUIDs:
+--------------------------
+#lsblk -f
+#blkld
+
+Labeling a file system:
+-----------------------
+# e2label /dev/sdb3 opt

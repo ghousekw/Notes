@@ -1,0 +1,179 @@
+Introduction:
+-------------
+Flexibilty Capacity:
+--------------------
+. You can create file systems that extend 
+  across multiple storage devices.
+. You can aggregate multiple storage devices 
+  into a single logical volume.
+
+Easily Resize Storage While Online:
+-----------------------------------
+Expand or shrink file systems in real-time while the data remains online and fully accessible.
+
+Online Data Relocation:
+------------------------
+Easily migrate data from one storage device to another while online.
+
+Convenient Device Naming:
+-------------------------
+You can use human-readable device names of your choosing.
+
+/dev/vg_database/lv_db_logs vs/dev/sdb3
+
+Disk Stripping:
+---------------
+Increase throughout by allowing your system to read data in parallel.
+
+Data Redundancy/Data Mirroring:
+-------------------------------
+Increase fault tolerance and readability by having more than one copy of your data.
+
+Snapshots:
+-----------
+create point-in-time Snapshots of your filesystems.
+
+LVM: Layers of Abstraction:
+---------------------------
+Physical Volumes(PV) are first level of Abstraction. Ex.Physical hard drives
+
+Volume Group(VG)  are second level of Abstraction. It is made up of one or more Physical volumes.You can have different types of PVs.
+
+logical Volumes(LV): are created from volumes groups(VG).File systems are then created on top of the logical volumes.Without lvm you create file systems on disk partitions.with lvm you create file systems on logical volumes.As long as their is free space on volume groups, logical volumes can be extended.You can also shrink logical volumes to reclaim unused space, but typically impractice you'll find yourself extending logical volumes.
+
+Logical Volume Creation Process:
+--------------------------------
+. Create one or more physical volumes.
+. Create a volume group from those one or more physical volumes.
+. create one or more logical volumes from the volume group.
+
+For this you will need root privilages.
+ex:
+lvmdiskscan
+  -list all available physical volumes.
+lsblk
+lsblk -p 
+  -display with full address
+df -h
+fdisk -l
+  -to see the storage that is attached to your linux system
+
+pvcreate /dev/sdb
+  - Initialize a disk for use by the logical manager
+pvs
+  - to list physical volumes
+
+vgcreate vg_app /dev/sdb
+  - to create a volume group
+vgs
+  - to list volume group
+
+pvs
+  - to check which physical volumes belongs to which volume group
+
+lvcreate -L 20G -n lv_data vg_app
+  - to create a logical volume with name lv_data and name of volume group which we will be used.
+lvs
+  - to list logical volumes
+lvdisplay
+  - to display with full details
+
+mkfs -t ext4 /dev/vg_app
+  - to create a file system on logical volume
+mkdir /data
+  - creating a mount point
+mount /dev/vg_app/lv_data /data
+  - mounting the file system on this logical volumes.
+df -h /data
+  - to display file system
+lvcreate -L 5G -n lv_app vg_app 
+  -creating a logical volume with 5G on Volume group
+lvs 
+  - displays the logical Volumes
+mkfs -t ext4 /dev/vg_app/lv_app
+mkdir /app
+
+vi /etc/fstab
+/dev/vg_app/lv_app /app ext4 defaults 0 0
+
+mount /app
+df -h /app
+  - to check whether it is mounted or not
+ls -l /dev/vg_app/lv_app
+ls -l /dev/mapper/vg_app-lv_app
+ls -l /dev/dm-1
+lvdisk 
+vgs
+lvcreate -L 25G -n lv_logs vg_app
+lvdisplay
+lvdisplay -m
+pvdisplay -m
+vgdisplay -m
+lvcreate -l 100%FREE      // lvcreate -l 6399
+lvcreate -l 100%FREE -n lv_logs vg_app
+lvs
+vgs
+lvmdiskscan
+  - to scan the available logical volume
+pvcreate /dev/sdc
+
+extended volume groups and logical volumes:
+-------------------------------------------
+vgextend vg_app /dev/sdc
+vgs
+pvs
+df -h /data
+  - to show the current the file system size
+lvextend -L +5G -r /dev/vg_app/lv_data
+lvs
+df -h /data
+lvextend -L +5G /dev/vg_app/lv_data
+  - If we didn't mention "-r" then it will not be able to display in file systems.
+  -Then we again have to resize file system to display in filesystems
+resize2fs /dev/vg_app/lv_data
+df -h /data
+lvdisplay -m /dev/vg_app/lv_data
+
+Mirroring logical volumes:
+--------------------------
+lvmdiskscan
+pvcreate /dev/sdd /dev/sde
+pvs
+vgcreate vg_safe /dev/sdd /dev/sde
+vgs
+lvcreate -m 1 -L 5G -n lv_secrets vg_safe
+lvs
+lvs -a
+pvdisplay -m
+mkfs -t ext4 /dev/vg_safe/lv_secrets
+mkdir /secrets
+mount /dev/vg_safe/lv_secrets /secrets
+df -h /secrets
+
+How to delete lvm,vg,pv:
+------------------------
+umount /secrets
+lvremove /dev/vg_safe/lv_secrets
+vgs
+vgreduce vg_safe /dev/sde
+vgs
+pvremove /dev/sde
+vgremove vg_safe
+vgs
+pvs
+pvremove /dev/sdd
+
+Migrate from one storage to another:
+------------------------------------
+pvcreate /dev/sde
+vgextend vg_app /dev/sde
+pvs
+pvmove /dev/sdb /dev/sde
+pvs
+pvdisplay /dev/sdb
+vgreduce vg_app /dev/sdb
+pvremove /dev/sdb
+pvs
+
+
+

@@ -68,3 +68,30 @@ sudo    -u user -s      Start a shell as
 
 Ex:
 su -l
+sudo /etc/init.d/oracle.start
+oracle started
+sudo -u bob /opt/bobapp/bin/start
+bob's app started
+su su - oracle
+whoami
+oracle
+exit
+whoami
+jason
+sudo -s
+whoami
+root
+pwd
+/home/jason
+exit
+sudo su
+exit
+sudo su -
+
+Changing the sudo Configuration:
+--------------------------------
+visudo      Edit the /etc/sudoers file
+user host=(users)[NOPASSWD:]commands
+
+adminuser ALL=(ALL)NOPASSWD:ALL
+jason linuxsvr=(root)/etc/init.d/oracle
