@@ -1,0 +1,243 @@
+How to manage users and groups
+Where user and group information lives
+How to add, delete and change users and groups.
+
+Accounts have a:
+----------------
+Username(or login ID)
+UID(user ID). This is a unique number.
+Default group
+Comments
+Shell
+Home directory location
+
+All of the information above are stored in:
+/etc/passwd
+
+root:x:0:0:root:/root:/bin/bash
+
+The format of the /etc/passwd:
+Username:password:UID:GID:Comments:home_dir:shell
+joe:x:1000:1000:Joe Henderson:/home/joe:/bin/bash
+
+Custom for usernames < 8 characters:
+-------------------------------------
+$ ps -fu joehenderson
+
+Usernames:
+----------
+Less than 8 characters in length
+Case sensitive.
+In all lowercase by convention.
+Numbers are allowed in usernames.
+Do not user special characters.
+
+Passwords are stored in /etc/shadow:
+------------------------------------
+Encrypted password used to be stored in /etc/passwd.
+/etc/passwd is readable by everyone.
+Now, encrypted Passwords are stored in /etc/shadow.
+/etc/shadow is only readable by root.
+Prevents users trying to crack Passwords.
+
+UIDs:
+-----
+The root account is always UID 0.
+UIDs are unique numbers.
+System accounts have UIDs<1000.
+  Configured in /etc/login.defs
+
+GID:
+----
+The GID listed in the /etc/passwd for is the default group for an account.
+New files belong to a user's default group.
+Users can switch groups by using the newgrp command.
+
+Comment Field:
+--------------
+Typically contains the user's full name.
+In the case of a system or application account,it often contains what the account us used for.
+May contain additional information like a phone number.
+Also called the GECOS field.
+
+Home Directory:
+---------------
+Upon login the user is placed in their home directory.
+If that directory doesn't exist, they are placed in "/".
+
+Shell:
+------
+The shell will be executed when a user logs in.
+A list of available shells are in /etc/shells.
+The shell doesn;t have to be a shell.
+To prevent interactive use of an account, use /usr/sbin/nologin or /bin/false as the shell.
+Shells can be command line applications.
+
+/etc/shadow:
+root:$6dfg9o485tneg3:16502:453534:7:::
+Username:encryptedpassword:noofdayssince1970:Nofdaysbeforethepasswordwillbechanged:Nofdaysafterthepasswordwillbechanged:NoOfdaysthepasswordmustchange:noofdaysthepasswordwillexpiry:::
+
+useradd:
+--------
+useradd [options] username
+-c "COMMENT"   Comments for the account.
+-m             Create the home directory.
+-s /shell/path The path to the user's shell.
+
+Creating a password using passwd:
+---------------------------------
+# passwd grant
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: pas updated
+successfully
+#
+Account information for "grant":
+--------------------------------
+#tail -l /etc/passwd
+grant:x:1000:1000:Grant Stewart: /home/grant:/bin/bash
+#tail -l /etc/shadow
+grant:$slforIUEHDO094RF.:16507:0:99999:7:::
+
+More useradd options:
+---------------------
+-g GROUP         specify the deafult group.
+-G GROUP1,GROUPN Additional groups.
+
+useradd:
+--------
+#useradd -c "Eddie Harris" -m -s
+/bin/ash -g sales -G projectxeharris
+#passwd eharris
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully.
+
+System or application account:
+------------------------------
+#useradd -C "Apache web server used" -d /opt/apache -r -s
+/usr/sbin/nologin apache
+#tail -l /etc/passwd
+apache:x:999:999:Apache Web server
+User:/opt/apcahe:/user/sbin/nologin
+
+/etc/skel:
+----------
+When using -m the home directory for the account is created.
+The contents of /etc/skel are copied into the home directory
+/etc/skel typically contains shell configurations files. (.profile,.bashrc,etc)
+
+More useradd options:
+---------------------
+-r                Create a system account.
+-d /home/dir      Specify the home directory
+
+Use -u to specify the UID:
+--------------------------
+#useradd -c "MySQL Server" -d /opt/mysql -u 97 -s /usr/sbin/nologin mysql
+#tail -l /etc/passwd
+mysql:x:97:1003:MySQL Server:/opt/mysql:/usr/sbin/nologin
+
+userdel [-r] username:
+----------------------
+#ls /home
+eharris grant
+#userdel eharris
+#ls /home
+eharris grant
+#userdel -r grant
+#ls /home
+eharris
+
+usermod:
+--------
+usermod [options] username
+
+-c "COMMENT"    Comments account.
+-g GROUP        Specify the default group
+-G GROUP1,GROUP2 Additional groups
+-s /shell/path   Path to the user's shell
+
+#usermod mysql /etc/passwd mysql:x:97:1003:MySQL Server:/opt/mysql:/usr/sbin/nologin
+# usermod -c "MySQL User" mysql
+#grep mysql /etc/passwd mysql:x:97:1003:MySQL User:/opt/mysql:/usr/sbin/nologin
+
+/etc/group:
+-----------
+root:x:0:sales:x:1001:john,marry
+
+The format of the /etc/group file:
+group_name:password:GID:account1,accountN
+
+groups[username]
+----------------
+#groups root
+root
+
+groupadd [options] group_name:
+------------------------------
+#groupadd web
+#tail -l /etc/group
+web:x:1003:
+#groupadd -g 2500 db
+#tail -l /etc/group
+db:x:2500:
+
+groupdel group_name:
+---------------------
+groupdel db
+
+groupmod
+--------
+groupmod [options] group_name
+-g GID change the group ID to GID.
+-n GROUP Rename the group to GROUP.
+
+#grep web/etc/group
+web:x:1003:
+#groupmod -g 1234 web
+#grep web /etc/group
+web:x:1234:
+#groupmod -n http web
+grep http /etc/group
+http:x:1234:
+
+Demonstration:
+--------------
+Create the following groups
+  writers
+  tv
+  movie
+Create user accounts
+  All users will have the default group of writers.
+  Some will also be in the tv group.
+  Others will be in the movie group.
+
+#groupadd writers
+#groupadd tv
+#groupadd movie
+#tail -3 /etc/group
+writesr:x:1002:tc:x:1002:
+tv:x:1003:
+movie:x:1004:
+#useradd -c "custom charlie" -g writers -G tv -m -b -s /bin/bash
+passwd groupadd writers
+groupadd tv
+groupmovie  movie
+tail -3 -g writers 
+useradd -c "Carlyon cuse" -g writers -G -m -s /bin/bash ccuse
+passwd ccuse
+group ccuse
+useradd -c "David fury" -g writers -G tv -m -s /bin/bash  dfury
+passwd dfury
+group dfury
+useradd -c "Matt Damon" -g writers -G movie -m -s /bin/bash mdamon
+passwd mdamon
+groups mdamon
+useradd -c "Ben Affleck" -g writers -G movie,tv -m -s /bin/bash baffleck
+passwd baffleck
+groups baffleck
+tail -e /etc/group
+tail -3 /etc/group
+group ccuse
+grep 1002 /etc/passwd

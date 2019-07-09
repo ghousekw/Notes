@@ -1,0 +1,107 @@
+Tab Completion:
+===============
+can save you typing
+Can provide a list of choices
+Works with commands
+Works with file and directory names
+Works with arguments to commands
+
+Repeat as Root:
+===============
+sudo !!
+id sam
+userdel -r sam
+sudo !!
+whoami
+uptime
+df -hT /boot
+!u
+sudo !w
+su -c "!!"
+id jim
+userdel -r jim
+su -c "!!"
+id jim
+
+Rerun a Command Starting with String:
+=====================================
+Sytax:
+  !<STRING>
+Examples:
+  !d
+  !du
+  !df
+
+Great for rechecking status:
+ Determine status
+ Perform Work
+ Recheck status
+ cd /mnt/data/restore
+ df -h .
+ tar xf ~/backup.tar
+ !d
+ sudo -s
+ cd /etc/opt
+ mkdir myapp
+ chown myapp myapp
+ chmod 700 myapp
+ cd /var/log
+ !m
+ !cho
+
+ Reuse arguments:
+ ===============
+ Helpful when working on a series of items.
+  Files
+  Directories
+  Etc.,
+Helpful for correcting command typos.
+To use the arguments from the previous command line in your current command, type "!*"
+
+touch file1 file2 file3
+ls !*
+vi !*
+cat !*
+
+mv !* /tmp/
+ls /tmp/file*
+cd tmp
+mkdir one two three
+chmod 700 !*
+ls -l
+grep !*
+sudo !!
+
+Strip out comments and blank lines:
+===================================
+grep -Ev '^#|^$' file.txt
+cd /etc/httpd/
+cd conf
+ls
+cat httpd.conf
+grep -Ev '^#|^$' httpd.conf
+grep -Ev '^#|^$' httpd.conf | less
+wc -l httpd.conf
+grep -Ev '^#|^$' httpd.conf | wc -l
+
+Reuse the Last Item of a command:
+---------------------------------
+Helpful when working on a single item.
+  File
+  Directory
+  User
+To use the last item on the previous command line in your current command,type "!$"
+mkdir restore
+cd !$
+pwd
+rm !$
+mkdir mispel
+rmdir !$
+mkdir !$l
+cd !$
+pwd
+cd
+sudo useradd -m -s /bin/bash jimmy
+sudo passwd !$
+sudo chage -M 60 !$
+sudo chage -l !$

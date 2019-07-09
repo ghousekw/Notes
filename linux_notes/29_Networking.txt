@@ -1,0 +1,348 @@
+TCP/IP
+Classful networks
+Subnet masks
+Broadcast Addresses
+CIDR
+Private address space
+
+TCP/IP:
+-------
+TCP/IP
+  Used for network communications
+  TCP = Transmission Control Protocol
+  IP = Internet Protocol
+TCP - Control data exchange.
+IP - sends data from one device to another.
+Hosts
+  - devices on a network that have an IP address
+
+IP Networking:
+--------------
+IP address
+  Example: 199.83.131.186
+Subnet mask
+  Example: 255.255.255.0
+Broadcast address
+  Example: 199.83.131.255
+octet.octet.octet.octet
+  octet values can be from 0 to 255
+
+Ip Addresses are comprise of two parts
+First part is network address and second is Host address.
+network tells router what network does host belong to and thus where to route that destined host.
+Host address tells router the specific device that the data should be delivered to.
+For routing properly each group of devices  or network needs to have unique network address and also each device needs to have unique host address.
+The class of an address determines what portion is used for network address and what portion is used for host address.
+
+Class networks:
+---------------
+class       network           Host Allowed
+A           1.0->127.0        16,777,216
+            Ex:17.24.88.9
+B         128.0->191.255        65,536
+          Ex:183.194.46.31
+C         192.0.0->233.255.255    255
+          Ex:199.83.131.186
+
+Subnet Masks:
+-------------
+class       Subnet Mask
+  A         255.0.0.0
+  B         255.255.0.0
+  C         255.255.255.0
+255 255 0   0
+183 194 46  31
+
+Broadcast Address:
+------------------
+It is a special logical address used to send data to all Host on the given IP address.
+
+class Network    Subnet Mask    Broadcast
+  A   17.0.0.0   255.0.0.0    17.255.255.255
+  B   183.194.0.0   255.255.0.0    183.194.255.255
+  C   199.83.131.0   255.255.255.0    199.83.131.255
+
+Classless Inter-Domain Routing(CIDR):
+-------------------------------------
+It allows network to be subdivided regardless of their traditional class.The subdivided networks are called subnets.
+
+IP: 127.67.198.94
+  class A network:121.0.0.0
+  class A subnet:255.0.0.0
+  class A Broadcast:255.255.255.0
+IP: 127.67.198.94 Subnet:255.255.255.0
+  CIDR network:127.67.198.0
+  CIDR subnet:255.255.255.0
+  CIDR broadcast:127.67.198.255
+
+Reserved Private Address Space:
+-------------------------------
+class Range            Private Address Space
+A     1.0.0.0-127.255.255.255 10.0.0.0-10.255.255.255
+B 128.0.0.0-233.255.255.255 172.16.0.0-172.31.255.255 
+C 192.0.0.0-233.255.255.255 192.168.0.0-192.168.255.255 
+
+DNS and Hostnames:
+==================
+Determining your IP address
+ip and ifconfig utilities
+Hostnames
+DNS and name resolution
+/etc/hosts
+/etc/nsswitch.conf
+
+Determining your IP address:
+----------------------------
+ip address
+  ip addr
+  ip a
+  ip address show or ip a s
+
+#ip address
+#ifconfig
+
+Hostnames:
+----------
+Human readable name for an IP address
+  webprod01 = 10.109.155.174
+A one word hostname is sometimes called as short hostname or unqualified hostname.
+
+DNS hostnames:
+--------------
+FQDN = fully qualified domain name.
+  webprod01.mycompany.com
+TLD = Top level domain
+  .com,.net,.org,etc.
+Domain
+  below(to the left of)TLD
+sub-domain
+  below(to the left of) the domain
+  webprod01.ny.us.mycompany.com
+
+Displaying the hostname:
+------------------------
+$hostname
+webprod01
+$uname -n
+webprod01
+$hostname -f
+webprod01.mycompany.com
+
+#hostname webprod01
+#echo 'webprod01' > /etc/hostname
+#vi /etc/sysconfig/network
+  HOSTNAME = webprod01
+
+Resolving DNS Names:
+--------------------
+host
+dig
+$host www.mycompany.com
+webprod01.mycompany.com has address 1.2.1.6
+$host 1.2.1.6
+6.1.2.1.in-addr.arpa domain name pointer
+www.mycompany.com.
+
+The /etc/hosts file:
+--------------------
+Format
+  IP FQDN alias(es)
+  10.11.12.13 webprod02.mycorp.com.webprod02
+Now you can refer to the host by name.
+  webprod02.mycorp.com OR webprod02
+/etc/hosts is local to your linux system. It does not propagate to the rest of the network.
+
+Sample /etc/hosts file:
+-----------------------
+127.0.0.1  localhost
+1.2.1.6    webprod01.mycompany.com webprod01
+10.11.12.14 webprod02.mycompany.com webprod02
+10.11.12.15 webprod03.mycompany.com webprod03
+10.11.13.7  dbcluster
+
+/etc/nsswitch.conf:
+-------------------
+.NSS = Name Service Switch
+.Controls the search order for resolutions
+
+hosts: files dns
+hosts: files nis dns
+
+DHCP,Dynamic and Static Addressing:
+===================================
+Network ports
+DHCP
+Static IP Address
+ifup / ifdown
+GUI / TUI tools
+
+Network Ports:
+--------------
+When a service starts it binds itself to a port.
+Range from 1 to 65,535
+Ports 1 - 1023 are well-known ports.
+  22   -   SSH
+  25   -   SMTP
+  80   -   HTTP
+  143  -   IMAP
+  389  -   LDAP
+  443  -   HTTPS
+https://www.mybank.com
+
+/etc/services:
+--------------
+Maps port names to port numbers.
+ssh   22/tcp    #SSH Remote Login Protocol
+smtp  25/tcp    #SMTP
+https 80/tcp    #http
+ldap  389/tcp   #LDAP
+https 443/tcp   #http protocol over TLS/SSL
+
+DHCP:
+-----
+Dynamic Host Configuration Protocol
+DHCP servers assign IP address to DHCP
+clients
+  IP Address
+  netmask
+  gateway
+  DNS servers
+Each IP is "leased" from the pool of IP addresses the DHCP server manages.
+  The lease expiration time is configurable on the DHCP server.(1hr,1day,1week,etc.)
+  The client must renew the lease if it wants to keep using the IP address. If no renewal is recieved, the IP is available to other DHCP clients.
+
+Configuring a DHCP client - RHEL:
+---------------------------------
+ifconfig -a or ip link
+
+/etc/sysconfig/network-scripts/ifcfg-DEVICE
+/etc/sysconfig/network-scripts/ifcfg-eth0
+/etc/sysconfig/network-scripts/ifcfg-enp5s2
+BOOTPROTO=dhcp
+
+Configuring a DHCP client - Ubuntu:
+-----------------------------------
+/etc/network/interfaces
+
+auto eth0
+iface eth0 inet dhcp
+
+Assigning a Static IP Address - RHEL:
+-------------------------------------
+/etc/sysconfig/network-scripts/ifcfg-eth0
+
+DEVICE=eth0
+BOOTPROTO=static
+IPADDR=10.109.155.174
+NETMASK=255.255.255.0
+NETWORK=10.109.155.255
+BROADCAST=10.109.155.255
+GATEWAY=10.109.155.1
+ONBOOT=yes
+
+Assigning a Static IP Address - Ubuntu:
+---------------------------------------
+/etc/network/interfaces
+
+auto eth0
+iface eth0 inet static
+      address 10.109.155.174
+      netmask 255.255.255.0
+      gateway 10.109.155.1
+
+Manually Assigning an IP Address:
+---------------------------------
+Format:
+-------
+ip address add IP[/NETMASK] dev NETWORK_DEVICE
+ip address add 10.11.12.13 dev eth0
+ip address add 10.11.12.13/255.255.255.0 dev eth0
+ip link set eth0 up
+ifconfig NETWORK_DEVICE addr netmask SUBNET_MASK 
+ifconfig eth0 10.11.12.13
+ifconfig eth0 10.11.12.13 netmask 255.255.255.0
+ifconfig eth0 up
+
+ifup/ifdown:
+------------
+can be used instead of ifconfig/ip
+Distribution dependent
+Uses Configuration files.
+Examples:
+ifup eth0
+ifup enp5s2
+ifdown eth0
+ifdown enp5s2
+
+GUI/TUI Tools:
+--------------
+RedHat
+  nmtui
+  system-config-network
+SUSE
+  YaST
+Ubuntu
+  No official tool available
+
+Network Troubleshooting:
+========================
+ping
+traceroute/tracepath
+netstat
+tcpdump
+telnet
+
+Testing Connectivity with Ping:
+-------------------------------
+Format:
+  ping HOST
+  ping -c COUNT HOST
+
+Example:
+  if we want to specify the number of packages to send then use '-c'
+  ping -c 3 google.com
+  
+# traceroute -n google.com
+$ tracepath -n google.com
+
+The netstat Command:
+--------------------
+Used to collect wide variety of network information.
+-n Display numerical addresses and ports.
+-i Displays a list of network interfaces.
+-r Displays the route table.(netstat -rn)
+-p Display the PID and program used.
+-l Display listening sockets.(netstat -nlp)
+-t Limit the output to TCP(netstat -nlp)
+-U Limit the output to UDP(netstat -nulp)
+
+Ex:
+netstat -i
+netstat -rn
+sudo netstat -ntlp
+
+Packet sniffing with tcpdump:
+-----------------------------
+tcpdump
+-n Display numerical addresses and ports.
+-A Display ASCII (text) output.
+-V Verbose mode. Produce  more output.
+-vvv Even more verbose output.
+Ex:
+sudo tcpdump
+sudo tcpdump -Anvvv
+
+telnet:
+-------
+It is replaced with SSH.But it can be useful for troubleshooting.
+
+telnet HOST_OR_IP PORT_NUMBER
+
+telnet google.com 80
+
+
+
+
+
+
+

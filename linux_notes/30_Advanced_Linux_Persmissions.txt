@@ -1,0 +1,115 @@
+Setuid:
+-------
+When a process is started, it runs using the starting user's UID and GID.
+Setuid = = Set User ID upon execution
+-rwsr-xr-x 1 root root /usr/bin/passwd
+ping
+chsh - allows user to change their shell.
+setuid files are an attack surface.
+Not honored on shell scripts.
+
+Octal Permissions:
+------------------
+setuid   setgid   sticky
+  0         0       0    Value for off
+  1         1       1    Binary value for on
+  4         2       1    Base 10 value for on
+
+Adding the Setuid Attribute:
+----------------------------
+chmod u+s /path/to/file
+chmod 4755 /path/to/file
+
+Removing the setuid Attribute:
+------------------------------
+chmod u-s /path/to/file
+chmod 0755 /path/to/file
+
+Finding Setuid Files:
+---------------------
+find / -perm /4000 -ls
+#older style:
+find / -perm +4000 -ls
+
+Only the Owner Should Edit Setuid Files:
+----------------------------------------
+            Symbolic        Octal
+Good:       -rwsr-xr-x      4755
+Bad:        -rwsrwxr-x      4775
+Really bad: -rwsrwxrwx      4777
+
+setgid:
+-------
+setgid = Set Group ID upon execution
+-rwxr-sr-x 1 root tty /usr/bin/wall
+crw--w---- 1 bob tty /dev/pts/0
+
+Finding setgid Files:
+---------------------
+find / -perm /2000 -ls
+
+#older style:
+find / -perm +2000 -ls
+
+Adding the Setgid Attribute:
+----------------------------
+chmod g+s /path/to/file
+chmod 2755 /path/to/file
+
+Adding the Setuid & Setgid Attribute:
+-------------------------------------
+chmod ug+s /path/to/file
+chmod 6755 /path/to/file
+
+Removing the setgid Attribute:
+------------------------------
+chmod g-s /path/to/file
+chmod 0755 /path/to/file
+
+Setgid on Directories:
+----------------------
+setgid on a directory causes new files to inherit the group of the directory.
+setgid causes Directories to inherit the setgid bit.
+ls not retroactive.
+Great for working with groups.
+
+Use an Integrity Checker:
+-------------------------
+Other options to find.
+Tripwire
+AIDE(Advanced Intrusion Detection Environment)
+OSSEC
+Samhain
+Package managers
+
+The Sticky Bit:
+---------------
+Use on a directory to only allow the owner of the file/directory to delete it.
+Used on /tmp:
+drwxrwxrwt 10 root root 4096 Feb 1 09:47 /tmp
+
+Adding the Sticky Bit:
+----------------------
+chmod o+t /path/to/file
+chmod 1777 /path/to/file
+
+Removing the Sticky Bit:
+------------------------
+chmod o-t /path/to/file
+chmod 0777 /path/to/file
+
+Reading ls Ouput:
+-----------------
+A capitalized special permission means the underlying noraml permission is not set.
+A lowercase special permission means the underlying normal permission set.
+Ex:
+$ ls -l test
+-rw-r--r-- 1 root root 0 Feb 1 09:47 test
+$ chmod u+s test
+$ ls -l test
+-rwSr--r-- 1 root root 0 Feb 1 09:47 test
+$ chmod u+x test
+$ ls -l test
+-rwsr--r-- 1 root root 0 Feb 1 09:47 test
+-rwxrwSr-- 1 root root 0 Feb 1 09:47 test
+drwxr-xr-T 2 root root 0 Feb 1 09:47 test
