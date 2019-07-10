@@ -21,9 +21,7 @@ Access the contents by executing
 
 PATH:
 -----
-An enivironment variable
- controls the command search PATH
-contains a list of directories
+An enivironment variable controls the command search PATH contains a list of directories
 
 Which command exactly:
 -----------------------

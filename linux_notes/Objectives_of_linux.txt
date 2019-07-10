@@ -1,0 +1,100 @@
+Role of the Kernel:
+===================
+. It specifies which program get which piece of memory.
+. It starts and kills the program.
+. Handles displaying text on a monitor.
+. If application ask resources simultaneously, kernel will decide which application would get.
+. Handles switching of applications.
+. It takes care of loading and unloading of tasks.
+. When tasks are more than CPU's, kernel decide when to switch focus between tasks.
+
+Boot Loader:
+. While computer boots up it run a small piece of code that helps to load kernel.
+
+The kernel of the operating system is like an air traffic controller at an airport. The kernel dictates which program gets which pieces of memory, it starts and kills programs, and it handles displaying text on a monitor. When an application needs to write to disk, it must ask the operating system to do it. If two applications ask for the same resource, the kernel decides who gets it, and in some cases, kills off one of the applications in order to save the rest of the system.
+
+The kernel also handles switching of applications. A computer will have a small number of CPUs and a finite amount of memory. The kernel takes care of unloading one task and loading a new task if there are more tasks than CPUs. When the current task has run a sufficient amount of time, the CPU pauses the task so that another may run. This is called "pre-emptive multitasking". Multitasking means that the computer is doing several tasks at once, and pre-emptive means that the kernel is deciding when to switch focus between tasks. With the tasks rapidly switching, it appears that the computer is doing many things at once.
+
+​⁠‌Each application may think it has a large block of memory on the system, but it is the kernel that maintains this illusion, remapping smaller blocks of memory, sharing blocks of memory with other applications, or even swapping out blocks that haven’t been touched to disk.
+
+Boot Loader:
+============
+When the computer starts up it loads a small piece of code called a boot loader. The boot loader’s job is to load the kernel and get it started. If you are more familiar with operating systems such as Microsoft Windows or Apple’s OS X, you probably never see the boot loader, but in the UNIX world it’s usually visible so that you can tweak the way your computer boots.
+
+The boot loader loads the Linux kernel, and then transfers control. Linux then continues with running the programs necessary to make the computer useful, such as connecting to the network or starting a web server.
+
+Applications:
+=============
+Like an air traffic controller, the kernel is not useful without something to control. If the kernel is the tower, the applications are the airplanes. Applications make requests to the kernel and receive resources, such as memory, CPU, and disk, in return. The kernel also abstracts the complicated details away from the application. The application doesn’t know if a block of disk is on a solid-state drive from manufacturer A, a spinning metal hard drive from manufacturer B, or even a network file share. Applications just follow the kernel’s Application Programming Interface (API) and in return don’t have to worry about the implementation details.
+
+When we, as users, think of applications, we tend to think of word processors, web browsers, and email clients. The kernel doesn’t care if it is running something that’s user facing, a network service that talks to a remote computer, or an internal task. So, from this we get an abstraction called a process. A process is just one task that is loaded and tracked by the kernel. An application may even need multiple processes to function, so the kernel takes care of running the processes, starting and stopping them as requested, and handing out system resources.
+
+Linux started out in 1991 as a hobby project by Linus Torvalds.
+Software projects take the form of source code, which is a human readable set of computer instructions. The source code may be written in any of hundreds of different languages, Linux just happens to be written in C, which is a language that shares history with the original UNIX.
+
+Source code is not understood directly by the computer, so it must be compiled into machine instructions by a compiler. The compiler gathers all of the source files and generates something that can be run on the computer, such as the Linux kernel.
+
+What is a Command?
+==================
+A command is a software program, that when executed on the command line, performs an action on the computer.
+A command runs a process on the operating system, which then causes the computer to perform a job.
+
+However, there is another way of looking at what a command is: look at its source. The source is where the command "comes from" and there are several different sources of commands within the shell of your CLI:
+
+Commands built-in to the shell itself: A good example is the cd command as it is part of the bash shell. When a user types the cd command, the bash shell is already executing and knows how to interpret that command, requiring no additional programs to be started.
+Commands that are stored in files that are searched by the shell: If you type a ls command, then the shell searches through the directories that are listed in the PATH variable to try to find a file named ls that it can execute. These commands can also be executed by typing the complete path to the command.
+Aliases: An alias can override a built-in command, function, or a command that is found in a file. Aliases can be useful for creating new commands built from existing functions and commands.
+Functions: Functions can also be built using existing commands to either create new commands, override commands built-in to the shell or commands stored in files. Aliases and functions are normally loaded from the initialization files when the shell first starts, discussed later in this section.
+
+Hardware Platforms:
+===================
+Linux started out as something that would only run on a computer like Linus’: a 386 with a specific hard drive controller. The range of support grew, as people built support for other hardware. Eventually, Linux started supporting other chips, including hardware that was made to run competitive operating systems!
+The types of hardware grew from the humble Intel chip up to supercomputers. Later, smaller-size, Linux supported, chips were developed to fit in consumer devices, called embedded devices. 
+Eventually, cellular phones and tablets started running Linux. A company, later bought by Google, came up with the Android platform which is a bundle of Linux and the software necessary to run a phone or tablet.
+Aside from phones and tablets, Linux can be found in many consumer devices. Wireless routers often run Linux because it has a rich set of network features.
+
+Choosing an Operating system:
+=============================
+Operating systems and software upgrades come on a periodic basis, called the release cycle.
+
+Software vendors will only support older versions of software for a certain period of time before not offering any updates, which is called the maintenance cycle (or life cycle)
+
+The maintenance and release cycles are important because in an enterprise server environment it is time consuming, and therefore rare, to do a major upgrade on a server. Instead, the server itself is replaced when there are major upgrades or replacements to the application that necessitate an operating system upgrade. Similarly, a slow release cycle is important because applications often target the current version of the operating system and you want to avoid the overhead of upgrading servers and operating systems constantly to keep up. 
+
+Individual software releases can be characterized as beta or stable. One of the great things about being an open source developer is that you can release your new software and quickly get feedback from users. If a software release is in a state that it has many new features that have not been rigorously tested, it is typically referred to as beta. After those features have been tested in the field, the software moves to a stable point. If you need the latest features, then you are looking for a distribution that has a quick release cycle and makes it easy to use beta software. On the server side, you want stable software unless those new features are necessary and you don’t mind running code that has not been thoroughly tested.
+
+Another loosely related concept is backward compatibility. This refers to the ability for a later operating system to be compatible with software made for earlier versions.
+
+Microsoft Windows:
+The Microsoft world splits the operating systems according to the machine’s purpose: desktop or server? The Windows desktop edition has undergone various naming schemes with the current version (as of this writing) being simply Windows 8. New versions of the desktop come out every 3-5 years and tend to be supported for many years. Backward compatibility is also a priority for Microsoft, even going so far as to bundle virtual machine technology so that users can run older software.
+
+Apple:
+Apple makes the OS X operating system, which has undergone UNIX certification. OS X is partially based on software from the FreeBSD project.
+
+BSD:
+There are several open source BSD (Berkely Software Distribution) projects, such as OpenBSD, FreeBSD, and NetBSD. These are alternatives to Linux in many respects as they use a large amount of common software. BSDs are typically implemented in the server role, though there are also variants such as GNOME and KDE that were developed for desktop roles.
+
+Some of the more popular commercial UNIXes are:
+
+Oracle Solaris
+IBM AIX
+HP-UX
+
+Linux:
+One aspect where Linux is much different than the alternatives is that after an administrator has chosen Linux they still have to choose a distribution.
+
+Some operating systems are available through only one vendor, such as OS X and Windows, with system support provided through the vendor. With 
+
+Linux, there are multiple options, from commercial offerings for the server or desktop, to custom distributions made to turn an old computer into a network firewall.
+
+Linux releases are considered to have long term support (LTS) of 5 years or more while others will only be supported for two years or less.
+
+The Debian distribution warns users about the pitfalls of using the “sid” release with the following warning:
+‘"sid" is subject to massive changes and in-place library updates. This can result in a very "unstable" system which contains packages that cannot be installed due to missing libraries, dependencies that cannot be fulfilled etc. Use it at your own risk!’
+
+Android:
+Android, sponsored by Google, is the world’s most popular Linux distribution. It is fundamentally different from its counterparts. Linux is a kernel, and many of the commands that will be covered in this course are actually part of the GNU (GNU's Not Unix) package. That is why some people insist on using the term GNU/Linux instead of Linux alone.
+
+Android uses the Dalvik virtual machine with Linux, providing a robust platform for mobile devices such as phones and tablets.
+
+This incompatibility means that a RedHat or Ubuntu user can not download software from the Google Play store. Likewise, a terminal emulator in Android lacks many of the commands of its Linux counterparts. It is possible, however, to use BusyBox with Android to enable most commands to work.

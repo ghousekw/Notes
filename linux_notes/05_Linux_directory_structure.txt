@@ -31,11 +31,11 @@ Common Directories:
 
     . /usr/sbin System admininstration binaries
 
+. /sys Used to display and sometimes configure the devices known to the Linux Kernel
+
 . /var Variable data, most notably log files
 
     . /var/log Log files
-
-. /sys Used to display and sometimes configure the devices known to the Linux Kernel
 
 . /cdrom Mount Point for CD-ROMs
 
