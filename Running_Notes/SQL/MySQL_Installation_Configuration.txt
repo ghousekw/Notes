@@ -1,0 +1,49 @@
+-Monty Widenius and David Axmark
+-Open Source
+-Provides Full featured API-Compatible
+-GPL(General Public Licence) Licence
+-Provides Full featured RDBMS
+-2008 acquired by Sun Microsystems
+-2010 acquired by Oracle
+-Current Version is 8.0
+-Official GUI is MySQL Workbench
+
+Open MySQL CLI unicode
+type your password
+  SHOW Databases;
+
+Open MySQL Workbench and goto preferences -> uncheck -> safe updates
+Management -> Databases Import/Export -> Import from self contained file -> Start Import
+
+Schemas - Collections of tables
+Databases - Collections of Schemas
+
+USE world;
+SHOW tables;
+select *from album;
+
+CREATE USER 'username'@'hostname' IDENTIFIED BY 'password';
+CREATE USER 'Bill'@'saturn.3sn.net' IDENTIFIED BY 'Secret!23x';
+                (or)
+CREATE USER 'Bill'@'%.3sn.net' IDENTIFIED BY 'Secret!23x';
+
+CREATE ROLE 'app_dev','app_read','app_write';
+GRANT ALL ON album.* TO 'app_dev';
+GRANT SELECT ON album.* TO 'app_read';
+GRANT INSERT,UPDATE,DELETE ON album.* TO 'app_write';
+
+CREATE USER 'read1'@'localhost' IDENTIFIED BY 'tempass';
+GRANT 'app_read' TO 'read1'@'localhost';
+SET DEFAULT ROLE 'app_read' TO 'read1'@'localhost';
+
+Status & System Variables -> activate role on login
+
+DROP USER 'read1'@'localhost';
+DROP ROLE 'app_dev','app_read','app_write';
+
+ALTER USER 'read1'@'localhost' PASSWORD EXPIRE;
+ALTER USER 'read1'@'localhost' PASSWORD EXPIRE DEFAULT;
+
+InnoDB - default engine for tables
+
+SELECT table_name,engine FROM information_schema.tables WHERE table_schema = "scratch";
