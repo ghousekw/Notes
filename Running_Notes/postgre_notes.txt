@@ -1,0 +1,5 @@
+1.psql -U postgres
+2.When prompted password, type the password you've set.
+3.CREATE DATABASE btredb OWNER postgres;
+4.\l
+

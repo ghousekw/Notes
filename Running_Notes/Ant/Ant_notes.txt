@@ -1,0 +1,17 @@
+ANT installation on ubuntu 16.04:
+---------------------------------
+sudo apt-get update    
+wget http://www-eu.apache.org/dist//ant/binaries/apache-ant-1.10.5-bin.zip    
+unzip apache-ant-1.10.5-bin.zip -d /usr/local/    
+cd /usr/local/    
+mv apache-ant-1.10.5 apache-ant    
+ln -s /usr/local/apache-ant/ /usr/local/ant
+
+vim /etc/profile.d/ant.sh
+export ANT_HOME=/usr/local/ant
+export PATH=${ANT_HOME}/bin:${PATH}
+
+
+source /etc/profile    
+ant –version
+Apache Ant(TM) version 1.10.5 compiled on July 10 2018

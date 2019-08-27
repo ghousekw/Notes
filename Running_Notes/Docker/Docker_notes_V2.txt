@@ -1,0 +1,146 @@
+```
+# Managing Container and Images
+  =============================
+    - docker images          <--- list the images
+    - docker search 'image- name'    <--- search in docker hub
+    - docker pull 'image name'   <--- it will only download the image
+    - docker rmi 'image name'   <--- delete image
+    - docker ps  <--- show running container, if the process is complete. It will basically don't show in ps.
+    - docker stop 'image name' <--- stop the container
+    - docker rm 'container name' <--- remove container
+    - docker rm -f 'container name' <--- forcely remove container
+    - docker logs 'id'  <--- it will show a snapshot of output.
+    - docker run -d 'id'  <--- it will run in daemon 
+    - docker run -d 'id' /bin/bash -c 'while loop'  <--- '-d' is daemon. and it will download centos.    
+    - docker stop 'id'  <---  it will pause the docker container.
+    - docker run -it 'id'   <--- get interactive shell.
+    - docker exec -it 'name/id' bash  <--- it is way to attach and get interactive shell on the container.
+ ```
+```
+# Networking
+  ==========
+   Notes:
+   ======
+    - docker will create a new network when run the container. <--- this doesn't mean the network interface of the host os.
+    - interface mostly start with 'v' interface; which is bridge to network inside the container.
+   Command:
+   ========
+      - Docker Inspect
+        ==============
+         - docker inspect 'name or id of container'                 <--- show all the information of the docker container.
+         - docker inspect 'name or id of container' | grep IP       <--- it will grep IP. dah!!
+      - Bridge Network
+        ==============
+         - docker run -d -p 8080 'name or id of container'          <--- '-p' publish port to 8080.
+           - check the process of docker.
+         - docker ps <--- you will see that 8080 is redirect to another port; now you can type IP:FORWARDED_PORT.
+           - for example:
+             - docker run -d -p 8080 'adejonge/helloworld'
+             - docker ps
+             - go to another computer basically and type: IP:FORWARDED_PORT
+        - docker run -d -p preferred_port:docker_port 'name or id of container' <--- specific port by the user.
+          - for example:
+             - docker run -d -p 9000:8080 'adejonge/helloworld'
+             - go to another computer basically and type: IP:9000 <--- because 8080 is mapped on 9000.
+        - docker run -d -p preferred_port:docker_port -p preferred_port:docker_port 'name or id of container' <--- specific port by the user.
+         - for example:
+            - docker run -d -p 9000:8080 9091:8080 adejonge/helloworld
+            - go to another computer basically and type: IP:9000 <--- because 8080 is mapped on 9000.
+            - go to another computer basically and type: IP:9001 <--- because docker allow to map one port into as many as port as user want.
+    - Host Network
+      ============
+        - docker run -d --net=host adejonge/helloworld <--- this will share port 8080 application to host.
+          - for example:
+            - ifconfig
+              - IP = 192.168.0.20
+            - docker run -d --net=host adejonge/helloworld <--- this is suppose to have its own IP, but it don't because it share same network.
+              - now you go 192.168.0.20:8080 
+```
+```
+# Shared and Persistent
+  =====================
+    # Notes
+      =====
+        - external is the key
+        - map the host folder to the container.
+        - persistent meant file is save on host, not in docker.
+    # Command
+      =======
+        - docker run -d -v 'host_directory_path':'docker_directory_path' 'container'
+          - for example:
+            - echo 'bye world' /tmp/hello/t.txt
+            - docker run -d -v /tmp/hellow/:/mnt/ 'container name or id'
+```
+```
+# Modifying Containers and Images
+  ===============================
+    - docker exec -it 'name/id' bash                <--- it is way to attach and get interactive shell on the container.
+    - docker commit 'old_image' 'new_image_name'    <--- commiting the new image.'creating new image from old container.
+```
+```
+# Creating images from scratch
+  ============================
+    # Notes
+      =====
+        - DockerFile.
+          - FROM          <--- image name
+          - MAINTAINER    <--- who maintains the container
+          - RUN           <--- basically cmd prompt
+          - ENV           <--- enviroment that runs on
+          - VOLUME        <--- link directory
+          - EXPOSE        <--- port to open
+          - CMD           <--- run the command at startup.
+        ----------------
+        - Create DockerFile.
+          =================
+            - create directory.
+              - For Example: my_tmp
+            - a bash script on that dir; named container.sh
+            - write dockerfile on a another file; name 'Dockerfile'. <--- name should be Dockerfile or it will not work.
+              - FROM ubuntu
+              - MAINTAINER Niranjan Shrestha <thisisnotrealemail@gmail.com>
+              - COPY container.sh /tmp/container.sh                 <-- you can use link instead of file.
+              - RUN chmod +x /tmp/container.sh
+              - CMD ["/tmp/container.sh"]
+          -----------
+           - now build the image.
+            - docker build -t 'name' . <--- '.' is for the directory.
+          -----------
+          ===========
+```
+```
+# Containers Working Together.
+  ============================
+    - share one container file / folder to another container by create a volume.
+      # Command
+        =======
+          - docker create --name my_data -v /usr/share/ngnix/html ubuntu <--- this is taking '/usr/share/ngnix/html' from ubuntu container and creating new volume.
+          - docker run -d --volumes-from my_data nginx <--- now that 'my_data' volume is used by nginx container.
+```
+```
+# Tricks
+  ======
+    - dont need to write full name or id number; can be unique.
+    - --name 'xxxx' ---> name flag; can set own name for the container.
+    - recommended not to use 'attach' flag; because it doesn't work sometime.
+    - '--priveleged' for the SeLinux linux system.
+    - docker socket '/var/run/docker.sock'
+```
+
+```
+Swarm
+-----
+  master: docker swarm init --advertise-addr <master ip>
+  slave: docker swarm join --token SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-7p73s1dx5in4tatdymyhg9hu2 192.168.99.121:2377
+    - use master token to connect and be as slave.
+      - docker swarm join-token worker
+    - or generate own token and send to master to connect.
+      
+  list node: docker node ls
+  deploy: docker service create --replicas 1 --name helloworld alpine ping docker.com
+    - important --replicas
+  inspect: docker service inspect --pretty helloworld
+           docker service ps helloworld
+  scaling: docker service scale helloworld=5
+  deleting: docker service rm helloworld
+```

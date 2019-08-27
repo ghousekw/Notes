@@ -1,0 +1,7 @@
+Try:
+  pip install pipenv
+Error:
+  subprocess.CalledProcessError: Command '('lsb_release', '-a')' returned non-zero exit status 1.
+
+Solution:
+sudo rm /usr/bin/lsb_release

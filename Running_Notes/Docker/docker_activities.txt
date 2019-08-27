@@ -1,0 +1,16 @@
+Building Docker images:
+------------------------
+1.ssh cloud_user@'ip address'
+2.docker run -it ubuntu:6 /bin/bash
+3.pulling the docker from git
+    git clone https://github.com/linuxacademy/content-dockerquest-spacebones.git
+4.cp content-dockerquest-spacebones/doge/* /var/www/html/
+5.mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.bak
+6.chkconfig httpd on
+7.exit
+8.docker ps -a
+9.docker commit 84ee2f41d3f8 spacebones:thewebsite
+10.docker images
+
+Dockerizing a nodejs application:
+---------------------------------

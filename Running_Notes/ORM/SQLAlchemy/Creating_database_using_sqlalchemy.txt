@@ -1,0 +1,135 @@
+we save the data file as 'database_setup.py'
+
+Creating a database with sqlalchemy has 4 major components:
+  1.Configuration - used to import all of the neccessary modules
+  2.Class - used to represent our data in python
+  3.Table - used to represent specific table in our database
+  4.Mapper - connects the columns of our table to the class  that represents it.
+
+1.Configuration:
+  Generally shouldn't change from project to project
+
+  At the beginning of file.
+    imports all modules needed
+    creates instance of declarative base  - used in order for the class to inherit all the features of sqlalchemy.
+  
+  At the end of the file.
+    Creates(or connects) the database and adds tables and columns.
+
+Code:
+
+  ***Beginning of file***
+
+    import sys
+
+    //This will come handy when we use mapper
+    from sqlalchemy import Column, ForiegnKey, Integer, String  
+
+    from sqlalchemy.ext.declarative import declarative_base
+
+    //Used in order to create ForiegnKey relationship
+    from sqlalchemy.orm import relationship 
+
+    from sqlalchemy import create_engine
+
+    //Helps us to begin write our class code
+    Base = declarative_base()
+
+  ***End of file***
+
+    engine = create_engine(
+      'sqlite:///restaurantmenu.db')
+
+2&3.Class & Table:
+  - representation of table as a python class.
+    
+    syntax:
+      __tablename__ = 'some_table'
+
+  - extends the Base class
+  - nested inside will be table and mapper code.
+
+Code:
+
+  class Restaurant(Base):
+    
+    //Creating a table restaurant
+    __tablename__ = 'restaurant'
+
+  class MenuItem(Base):
+
+    //Creating a table MenuItem
+    __tablename__ = 'menu_item'
+
+4.Mapper:
+  - maps python objects to columns in our database
+
+    syntax:
+    columnName = Column(attributes,..)
+    
+    Examples attributes:
+    String(250)
+    Integer
+    relationship(Class)
+    nullable = False
+    primary_key = True
+    ForiegnKey('some_table.id')
+
+Code:
+
+  #Inside Restaurant class
+
+  name = Column(String(80),nullable = False)
+
+  id = Column(Integer, primary_key = True)
+
+  #Inside MenuItem class
+
+  name = Column(String(80),nullable = False)
+
+  id = Column(Integer, primary_key = True)
+
+  course = Column(String(250))
+
+  price = Column(String(8))
+
+  restaurant_id = Column(Integer, ForiegnKey('restaurant.id'))
+
+  restaurant = relationship(Restaurant)
+
+Complete database_setup.py file:
+--------------------------------
+***Beginning of file***
+
+    import sys
+      //This will come handy when we use mapper
+    from sqlalchemy import Column, ForeignKey, Integer, String  
+    from sqlalchemy.ext.declarative import declarative_base
+      //Used in order to create ForeignKey relationship
+    from sqlalchemy.orm import relationship 
+    from sqlalchemy import create_engine
+      //Helps us to begin write our class code
+    Base = declarative_base()
+
+    class Restaurant(Base):
+        //Creating a table restaurant
+      __tablename__ = 'restaurant'
+      name = Column(String(80),nullable = False)
+      id = Column(Integer, primary_key = True)
+
+    class MenuItem(Base):
+
+      //Creating a table MenuItem
+      __tablename__ = 'menu_item'
+      name = Column(String(80),nullable = False)
+      id = Column(Integer, primary_key = True)
+      course = Column(String(250))
+      price = Column(String(8))
+      restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
+      restaurant = relationship(Restaurant)
+
+***End of file***
+  engine = create_engine(
+    'sqlite:///restaurantmenu.db')
+
+  

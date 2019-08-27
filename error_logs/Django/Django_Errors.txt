@@ -1,5 +1,31 @@
 Django Error Logs:
 ------------------
+Try:Python manage.py runserver
+  Error:UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+
+*Solution:
+  Goto: C:\Users\areeb\.virtualenvs\booktime-HFi0bLYG\Lib\site-packages\django\template\loaders\filesystem.py
+
+Original:
+---------
+  def get_contents(self, origin):
+        try:
+            with open(origin.name, encoding=self.engine.file_charset, 'rb') as fp:
+                lines = [l.decode('utf8', 'ignore') for l in fp.readlines()]
+        except FileNotFoundError:
+            raise TemplateDoesNotExist(origin)
+
+Modified:
+---------
+def get_contents(self, origin):
+        try:
+            with open(origin.name, encoding="utf16") as fp:
+                return fp.read()
+        except FileNotFoundError:
+            raise TemplateDoesNotExist(origin)
+
+----------------------------------------------------------------------------------------------------------------------
+
 Error:
 django can't find new sqlite version? (SQLite 3.8.3 or later is required (found 3.7.17))
 
@@ -8,3 +34,4 @@ It is caused due to latest version of Django because they changed the sqlite ver
 So i roll back to previous version which is,django==2.1
 Then it works perfectly fine!!
 
+----------------------------------------------------------------------------------------------------------------------

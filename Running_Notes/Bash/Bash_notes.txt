@@ -1,0 +1,20 @@
+write a file:
+-------------
+->vim hello.sh
+#!/bin/bash -this is called shebang
+
+To execute the above file:
+--------------------------
+bash hello.sh
+ ->we can even make this file as executable by changing the permission as
+ chmod u+x hello.sh
+
+To check the above file as debugging mode:
+------------------------------------------
+sh -x hello.sh
+
+edit the above file as
+
+#!/bin/bash
+/bin/echo "hello, world!"
+ls /tmp/

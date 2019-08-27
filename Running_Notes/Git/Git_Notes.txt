@@ -1,0 +1,171 @@
+Clone:
+  $ git clone https://github.com/gitname/gitbranch.git
+
+Initialization:
+  $ git init
+
+Configuration:
+  # Output, set the basic global variables
+  $ git config --global user.name
+  $ git config --global user.name "My Name"
+
+  $ git config --global user.email
+  $ git config --global user.email "MyEmail@Zoho.com"
+
+  $ git config --global core.editor
+  
+  #For 'VSCODE'
+  $ git config --global core.editor "code --wait" 
+
+  $git config --global core.excludesfile ~/.gitignore.global
+
+Help:
+  #Available command
+  $git help
+
+  #All Available command
+  $git help -a
+
+  #Find a specific command in a document
+  $git help <command>
+  $git help add
+  $git help commit
+  $git help init
+
+Status:
+  #Show branches, not tracked files, changes and other differences
+  $ git status
+
+  # See the other git status of usage 
+  $ git Help Status
+
+Add to:
+  #Add a file
+  $ git add HelloWorld.java
+
+  # Add files in a subdirectory
+  $ git add /path/to/file/HelloWorld.c
+
+  # Supports regular expressions 
+  $ git the Add ./ * .java
+
+Branch:
+  # View all the branches and remote branch
+  $ git branch -a
+
+  # Create a new branch
+  $ git branch myNewBranch
+
+  # Delete a branch
+  $ git branch -d myBranch
+
+  # Rename branch 
+  # git branch -m <old name> <new name>
+  $ git branch -m myBranchName myNewBranchName
+
+  #Editing
+  $ git branch myBranchName --edit-description
+
+Check Out:
+  # Detection of a repository, the default will be updated to the master branch
+  $ git checkout
+  # Checked out to a particular branch
+  $ git checkout branchName
+  $ git checkout -- 'filename'
+  $ git checkout -- .
+
+Commit:
+  $ git the commit -m " Messages while commiting changes to your code "
+  $ git commit -a 
+  
+  # Merges previous commit with new commit message
+  $ git commit --amend -m "message"
+  $ git commit 'SHAvalue' -- 'filename'
+
+Diff:
+  # Show different working directory and index
+  $ git diff
+
+  # Show differences in colors
+  $ git diff --color-words
+
+  #Show index different from last commit
+  $ git diff --cached
+  (or)
+  $ git diff --staged
+
+  #Show working directory and the last time you submitted a different 
+  $ git diff HEAD
+
+  #Show differences of selected commits(SHAvalues)
+  $ git diff SHAvalue1..SHAvalue2
+  $ git diff SHAvalue2..HEAD --color-words
+
+Log:
+  #Show all submissions
+  $ git log
+
+  # Display a few submissions
+  $ git log -n 10
+
+  # Display only merge commit 
+  $ git log --merges
+  
+  $ git log --grep = "search name"
+  $ git log --since = "2019-27-8"
+  $ git log --until = "2019-25-8"
+  $ git log --author = "author name"
+  $ git log --oneline
+
+Merge:
+  #Merge other branches into the current branch
+  $ git merge branchName
+
+  # Submitted after the creation of a new merger in the merger 
+  $ git merge --no-ff branchName
+
+mv:
+  # Renaming
+  $ git mv HelloWorld.c HelloNewWorld.c
+
+  # Moving
+  $ git mv HelloWorld.c ./new/path/HelloWorld.c
+
+  # Forced rename or move 
+  # This file already exists, it will be overwritten 
+  $ git mv -f myFile existingFile
+
+Pull:
+  # Origin from a remote master branch update repository 
+  # git pull <distal> <branch> 
+  $ git pull Origin master
+
+Push:
+  #Update the local branch to the remote origin master branch 
+  # git push <remote> <branch> 
+  # git push is equivalent to git push origin master 
+  $ git push origin master
+
+rm:
+  # RemoveHelloWorld.c
+  $ git rm HelloWorld.c
+
+  # Remove the files in the subdirectory 
+  $ git rm /pather/to/the/file/HelloWorld.c
+
+  # Remove commits from the logs
+  $ git rm --cached 'filename'
+
+# If we want to find the location of head pointer
+$ cat .git/refs/heads/master
+
+show:
+  $ git show "SHA value"
+
+Revert:
+  $ git revert 'SHAvalue..
+
+# To remove untracked files
+$ git clean 
+
+$ git ls-tree HEAD
