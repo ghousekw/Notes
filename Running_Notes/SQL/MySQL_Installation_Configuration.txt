@@ -45,5 +45,10 @@ ALTER USER 'read1'@'localhost' PASSWORD EXPIRE;
 ALTER USER 'read1'@'localhost' PASSWORD EXPIRE DEFAULT;
 
 InnoDB - default engine for tables
+Features:
+ACID - Atomicity Consistency Isolation Durability
+Row-level constraints
+Foreign Key constaction
+Multi Version Concurrency Constrol
 
 SELECT table_name,engine FROM information_schema.tables WHERE table_schema = "scratch";
